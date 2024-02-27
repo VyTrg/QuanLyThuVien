@@ -1,25 +1,30 @@
-
+#define Max_DS_dausach 100
 struct Dausach{
-	char ISBN[11];
-	char tensach[23];
+	std::string ISBN;
+	std::string tensach;
 	int sotrang;
-	char tacgia[13];
+	std::string tacgia;
 	int nxb;
-	char theloai[13];
+	std::string theloai;
 	
-	Nodesach First = NULL;
+	dms First = NULL;
 	
 	DauSach(){
 		
 	}
 	
-	DauSach(char *isbn, char* ten, int st, char* tg, int xb, char* tl){
-		strcpy(ISBN, isbn);
-		strcpy(tensach, ten);
+	DauSach(std::string isbn, std::string ten, int st, std::string tg, int xb, std::string tl){
+		ISBN = isbn;
+		tensach = ten;
 		sotrang = st;
-		strcpy(tacgia, tg);
+		tacgia = tg;
 		nxb = xb;
-		strcpy(theloai, tl);
-		First = NULL;
+		theloai = tl;
 	}
 };
+
+struct DS_dausach{
+	int n;
+	Dausach *DSDS[Max_DS_dausach];
+};
+
