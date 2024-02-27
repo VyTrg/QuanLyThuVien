@@ -1,20 +1,26 @@
 struct Sach{
-	char masach[10];
+	std::string masach;
 	int trangthai;
-	char vitri[10];
+	std::string vitri;
 	
 	Sach(){
 		
 	}
 	
-	Sach(char* ms, int tt, char* vt){
-		strcpy(masach, ms);
+	Sach(std::string ms, int tt, std::string vt){
+		masach = ms;
 		trangthai = tt;
-		strcpy(vitri, vt);
+		vitri = vt;
 	}
 };
 
-struct Nodesach{
+struct NodeDMSach{
 	Sach sach;
-	Nodesach *next;
+	NodeDMSach *next;
 };
+
+typedef struct NodeDMSach* dms;
+
+
+
+
