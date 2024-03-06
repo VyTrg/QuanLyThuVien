@@ -1,42 +1,44 @@
-#define Max_DS_DauSach 100
-struct DauSach{
-	std::string ISBN;
-	std::string tensach;
-	int sotrang;
-	std::string tacgia;
-	int nxb;
-	std::string theloai;
-	
-	Nodedms First = NULL;
-};
-
-struct DS_DauSach{
-	int n = 0;
-	DauSach *data[Max_DS_DauSach];
-	
-};
-
-/*
-them vao vi tri thich hop
-them vao danh sach
-*/
-
-void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach, int position);
-void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach);
-
-void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach, int position){
-	if(position > DSDS.n){
-		std::cout << "Vi tri them khong hop le, khong the them\n";
+//dau sach danh sach tuyen tinh 
+// them vao 
+void InsertDauSach
+	}(DS_DauSach &DSDS, DauSach *dausach, int position){
+	if(position < 0){
+		printf("Vi tri them dau sach khong hop le \n");
+		return;
+	// neu position >= DSDS.n thi Insert vao cuoi danh sach
+	for(int i=DSDS.n; i>position; i--){
+		DSDS.nodes[i] = DSDS.nodes[i-1];
 	}
+	DSDS.nodes[position] = dausach;
+	DSDS.n++; 
+}
+
+}
+void InsertLastDauSach(DS_DauSach &DSDS, DauSach *dausach){
+	// su dung khi doc file
+	if(DSDS.n > MAX_SIZE_DAUSACH)
+		printf("DSDS day \n");
 	else{
-				
+		DSDS.nodes[DSDS.n++] = dausach;
 	}
 }
 
-void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach){
-	if(DSDS.n > Max_DS_DauSach){
-		std::cout << "Danh sach dau sach da day\n";
-	}
-	else{
-	}
+// phep loai bo 
+void delete_item (DS_DauSach &DSDS, int position)
+{
+	int j;
+	int temp;
+	if(position <= 0 || position > DSDS.n)
+		printf("Vi tri xoa khong phu hop.");
+	else
+		if(empty(DSDS))
+			printf("Danh sach khong co phan tu.");
+		else
+		{
+			for(j = position;  j< DSDS.n ; j++)
+				plist.nodes[j-1] = plist.nodes[j];
+				DSDS.n--;
+		}
 }
+
+

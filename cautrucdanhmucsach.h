@@ -1,63 +1,76 @@
+//cau truc danh muc sach 
 struct Sach{
-	std::string masach;
-	int trangthai;
-	std::string vitri;
+	char MASACH[20];
+	int trangthai; // 0 cho muon duoc  1 da cho muon  2 da thanh ly
+	char vitri[20];
+	Sach(){
+		Sach(char ms[20], int tt, char vt[30]);
+		strcpy(MASACH,ms);
+		trangthai=tt;
+		strcpy(vitri, vt);
+	}
 };
-
-struct NodeDMSach{
+// lien ket don
+struct NodeSach{
 	Sach sach;
-	NodeDMSach *next;
+	NodeSach *next;
 };
-
-typedef struct NodeDMSach* Nodedms;
-
-//enum TrangThai{
-//	MuonDuoc;
-//	DaMuon;
-//	DaThanhLy;
-//};
-//
-//prototype
-/*
-them vao dau
-them vao sau
-them vao cuoi
-*/
-void InsertFirst_NodeDMSach(Nodedms &First, Sach &sach);
-void InsertAfter_NodeDMSach(Nodedms &First, Sach &sach);
-void InsertLast_NodeDMSach(Nodedms &First, Sach &sach);
-
-
-Nodedms CreateNodeSach(Sach &sach);
-
-Nodedms CreateNodeSach(Sach &sach){
-	Nodedms First = new NodeDMSach;
-	First->sach = sach;
-	return First;
+// cap phat bo nho moi
+NodeSach* CreateNodeSach(Sach &sach){
+	NodeSach *node = new NodeSach;
+	node->sach = sach;
+	return node;
 }
-
-void InsertFirst_NodeDMSach(Nodedms &First, Sach &sach){
-	Nodedms newnode = CreateNodeSach(sach);
-	
-	newnode->next = First;
-	First = newnode;
+//them vao dau danh sach 
+void Insert_First(NodeSach* &First, Sach &sach){
+	NodeSach *newNode = CreatNodeSach(sach);
+	newNode->next = First;
+	First = newNode;
 }
-
-void InsertAfter_NodeDMSach(Nodedms &First, Sach &sach){
-	Nodedms newnode = CreateNodeSach(sach);
-	
-	newnode->next = First->next;
-	First->next = newnode;
+//them vao sau nut 
+void Insert_After(NodeSach* &node, Sach &sach){
+	NodeSach *newNode = CreatNodeSach(sach);
+	newNode->info = sach;
+	newNode->next = node->next;
+	node->next = newNode;
 }
-
-void InsertLast_NodeDMSach(Nodedms &First, Sach &sach){
-	Nodedms newnode = CreateNodeSach(sach);
-	
-	if(First == NULL) InsertFirst_NodeDMSach(First, sach);
+//them vao cuoi danh sach 
+void Insert_Last(NodeSach* &node, Sach &sach){
+	if(First == NULL){
+		Insert_First(First, sach);
+	}
 	else{
-		Nodedms temp = First;
-		while(temp->next != NULL)
-			temp = temp->next;
-		InsertAfter_NodeDMSach(temp, sach);
-	}	
+		NodeSach *last;
+		for(last=First; last->next != NULL; last = last->next);
+		Insert_After(last,sach);
+	}
 }
+//xoa phan tu dau cua danh sach 
+void Delete_First(NodeSach* &First){
+	if(First == NULL)
+		return 0;
+	First = First->next;
+}
+//xoa phan tu theo ndung 
+int Delete_Infor(NodeSach* &First, Sach &sach)
+{ 	NodeSach *p;
+	p = First;
+  if (First==NULL ) return 0;
+  while(First !=NULL && First->info ==sach ) {
+        Delete_First(First);
+  }
+  if (First==NULL );
+for ( p=First; p->next!=NULL ; )   
+  if (p->next->info==sach ) {
+		Delete_After(p);
+	}
+	else p=p->next;
+}
+
+
+
+
+
+
+
+
