@@ -10,7 +10,11 @@ struct NodeDMSach{
 };
 
 typedef struct NodeDMSach* Nodedms;
-
+/*trang thai
+ * muonduoc = 0
+ * damuon = 1
+ * dathanhly = 2
+ */
 //enum TrangThai{
 //	MuonDuoc;
 //	DaMuon;
@@ -61,3 +65,5 @@ void InsertLast_NodeDMSach(Nodedms &First, Sach &sach){
 		InsertAfter_NodeDMSach(temp, sach);
 	}	
 }
+
+
