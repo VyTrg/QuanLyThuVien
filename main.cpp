@@ -1,12 +1,22 @@
 #include <iostream>
 #include <string.h>
+#include <winbgim.h> 
 
 #include "cautrucdanhmucsach.h"
 #include "cautrucdausach.h"
 #include "cautrucmuontra.h"
+#include "cautructhedocgia.h"
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int main(int argc, char** argv) {
-	return 0;
+int main(int argc, char *argv[])
+{
+	// now, you can run project
+//	initwindow(300, 300);			// init window graphics
+//	setbkcolor(1);					// set background
+//   	cleardevice();
+//	setcolor(14);					// set text color
+//	outtextxy(50,100,"Graphics in Dev-C++");// print text in window graphics
+//	
+//	while(!kbhit()) delay(1);		// pause screen	
+//	return 0;
 }
