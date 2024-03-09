@@ -1,6 +1,6 @@
 #define Max_DS_DauSach 100
 struct DauSach{
-	std::string ISBN;
+	char ISBN[14];
 	std::string tensach;
 	int sotrang;
 	std::string tacgia;
