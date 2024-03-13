@@ -16,14 +16,16 @@ struct DS_DauSach{
 	
 };
 
+/*-------------------Prototype------------------*/
 
-/*
-them vao vi tri thich hop
-them vao danh sach
-*/
-
+//them vao danh sach theo vi tri
 void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach, int position);
+
+//them vao danh sach
 void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach);
+
+
+/*-------------------Function------------------*/
 
 void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach, int position){
 	if(position > DSDS.n){
