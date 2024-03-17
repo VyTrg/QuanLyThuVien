@@ -13,9 +13,9 @@
 #include "cautrucdausach.h"
 #include "cautrucmuontra.h"
 #include "cautructhedocgia.h"
-#include "ThongTin.h"
+//#include "ThongTin.h"
 #include "mylib.h"
-#include "menu.h"
+//#include "menu.h"
 //#include "define.h"
 
 /*-------------------Prototype------------------*/

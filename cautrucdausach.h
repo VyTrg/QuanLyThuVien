@@ -1,4 +1,20 @@
+#ifndef CAUTRUCDAUSACH_H_INCLUDED
+#define CAUTRUCDAUSACH_H_INCLUDED
+
+#pragma once
+
+#include "cautrucdanhmucsach.h"
+//#include "cautrucmuontra.h"
+//#include "cautructhedocgia.h"
+
 #define Max_DS_DauSach 100
+/*-------------------Prototype-Struct------------------*/
+struct DauSach;
+struct DS_DauSach;
+struct NodeDMSach;
+typedef struct NodeDMSach* Nodedms;
+
+/*-------------------Struct------------------*/
 struct DauSach{
 	char ISBN[14];
 	std::string tensach;
@@ -7,7 +23,7 @@ struct DauSach{
 	int nxb;
 	std::string theloai;
 	
-	Nodedms First = NULL;
+	Nodedms *First = NULL;
 };
 
 struct DS_DauSach{
@@ -43,3 +59,5 @@ void AddDauSach(DS_DauSach &DSDS, DauSach *DauSach){
 	else{
 	}
 }
+
+#endif 

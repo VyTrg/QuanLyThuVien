@@ -1,7 +1,19 @@
+#ifndef CAUTRUCDANHMUCSACH_H_INCLUDED
+#define CAUTRUCDANHMUCSACH_H_INCLUDED
 
+#pragma once
+
+#include "cautrucdausach.h"
+#include "cautrucmuontra.h"
+#include "cautructhedocgia.h"
 
 #define MAX 100000
 
+/*-------------------Prototype-Struct------------------*/
+struct Sach;
+struct NodeDMSach;
+
+/*-------------------Struct------------------*/
 struct Sach{
 	char masach[6];
 	int trangthai;
@@ -108,3 +120,4 @@ Nodedms GetSach_position(Nodedms &First, int position){
 //	return masach;
 //}
 
+#endif 
