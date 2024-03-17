@@ -1,7 +1,19 @@
-#include<string>
+#ifndef CAUTRUCDANHMUCSACH_H_INCLUDED
+#define CAUTRUCDANHMUCSACH_H_INCLUDED
+
+#pragma once
+
+#include "cautrucdausach.h"
+#include "cautrucmuontra.h"
+#include "cautructhedocgia.h"
 
 #define MAX 100000
 
+/*-------------------Prototype-Struct------------------*/
+struct Sach;
+struct NodeDMSach;
+
+/*-------------------Struct------------------*/
 struct Sach{
 	char masach[6];
 	int trangthai;
@@ -28,20 +40,20 @@ enum TrangThai{
 /*-------------------Prototype------------------*/
 //tao node sach
 Nodedms CreateNodeSach(Sach &sach);
-
-//them vao dau danh sach
+//
+////them vao dau danh sach
 void InsertFirst_NodeDMSach(Nodedms &First, Sach &sach);
-
-//them vao sau danh sach
+//
+////them vao sau danh sach
 void InsertAfter_NodeDMSach(Nodedms &First, Sach &sach);
-
-//them vao cuoi danh sach
+//
+////them vao cuoi danh sach
 void InsertLast_NodeDMSach(Nodedms &First, Sach &sach);
-
-//lay thong tin sach bang vi tri 
+//
+////lay thong tin sach bang vi tri 
 Nodedms GetSach_position(Nodedms &First, int position);
-
-//lay thong tin sach bang ma sach
+//
+////lay thong tin sach bang ma sach
 Nodedms GetSach_masach(Nodedms &First, std::string masach);
 
 //sinh ma the tu dong
@@ -108,3 +120,4 @@ Nodedms GetSach_position(Nodedms &First, int position){
 //	return masach;
 //}
 
+#endif 
