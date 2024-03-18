@@ -15,14 +15,14 @@ struct NodeDMSach;
 
 /*-------------------Struct------------------*/
 struct Sach{
-	char masach[6];
+	std::string masach;
 	int trangthai;
 	std::string vitri;
 };
 
 struct NodeDMSach{
 	Sach sach;
-	NodeDMSach *next;
+	NodeDMSach *next = NULL;
 };
 
 typedef struct NodeDMSach* Nodedms;
@@ -56,8 +56,8 @@ Nodedms GetSach_position(Nodedms &First, int position);
 ////lay thong tin sach bang ma sach
 Nodedms GetSach_masach(Nodedms &First, std::string masach);
 
-//sinh ma the tu dong
-//char* SinhMS_tudong(char *masach);
+//sinh ma sach tu dong
+std::string MaSach(Nodedms &First, DauSach *DauSach);
 
 
 /*-------------------Function------------------*/
@@ -119,5 +119,21 @@ Nodedms GetSach_position(Nodedms &First, int position){
 //    }
 //	return masach;
 //}
+
+std::string MaSach(DauSach *DauSach){
+	std::string ms = "";
+	
+	bool check = true;
+	int length = DauSach->tensach.size();
+	for(int i = 0; i <  length; ++i){
+		if(DauSach->tensach[i] == ' ')
+			check = true;
+		else if(DauSach->tensach[i] == ' ' && check == true){
+			ms.push_back(DauSach->tensach[i]);
+			check = false;
+		}
+	}
+	return ms;
+}
 
 #endif 
