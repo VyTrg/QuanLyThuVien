@@ -27,7 +27,7 @@ struct DauSach{
 };
 
 struct DS_DauSach{
-	int n = 0;
+	int n;
 	DauSach *data[Max_DS_DauSach];
 	
 };
