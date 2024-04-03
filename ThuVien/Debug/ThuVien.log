@@ -1,0 +1,15 @@
+﻿  main.cpp
+C:\Users\kieutiny\source\repos\ThuVien\graphics.h(281,5): warning C4273: 'getch': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(444,30):
+  see previous definition of 'getch'
+  
+C:\Users\kieutiny\source\repos\ThuVien\graphics.h(282,5): warning C4273: 'kbhit': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(450,30):
+  see previous definition of 'kbhit'
+  
+C:\Users\kieutiny\source\repos\ThuVien\cautrucdausach.h(105,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+  ThuVien.vcxproj -> C:\Users\kieutiny\source\repos\ThuVien\Debug\ThuVien.exe

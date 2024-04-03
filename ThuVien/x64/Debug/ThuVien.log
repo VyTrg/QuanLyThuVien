@@ -1,0 +1,29 @@
+﻿  main.cpp
+C:\Users\kieutiny\source\repos\ThuVien\graphics.h(281,5): warning C4273: 'getch': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(444,30):
+  see previous definition of 'getch'
+  
+C:\Users\kieutiny\source\repos\ThuVien\graphics.h(282,5): warning C4273: 'kbhit': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(450,30):
+  see previous definition of 'kbhit'
+  
+C:\Users\kieutiny\source\repos\ThuVien\cautrucdausach.h(105,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+main.obj : error LNK2019: unresolved external symbol arc referenced in function "void __cdecl rndConnerRect(int,int,int,int,int)" (?rndConnerRect@@YAXHHHHH@Z)
+main.obj : error LNK2019: unresolved external symbol bar referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol floodfill referenced in function "public: void __cdecl button::display(void)" (?display@button@@QEAAXXZ)
+main.obj : error LNK2019: unresolved external symbol line referenced in function "void __cdecl rndConnerRect(int,int,int,int,int)" (?rndConnerRect@@YAXHHHHH@Z)
+main.obj : error LNK2019: unresolved external symbol getbkcolor referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol setbkcolor referenced in function "public: void __cdecl button::display(void)" (?display@button@@QEAAXXZ)
+main.obj : error LNK2019: unresolved external symbol setcolor referenced in function "public: void __cdecl button::display(void)" (?display@button@@QEAAXXZ)
+main.obj : error LNK2019: unresolved external symbol setfillstyle referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol initwindow referenced in function main
+main.obj : error LNK2019: unresolved external symbol outtextxy referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol settextstyle referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol textheight referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+main.obj : error LNK2019: unresolved external symbol textwidth referenced in function "void __cdecl barWithTxt(int,int,int,int,int,char *,int,int)" (?barWithTxt@@YAXHHHHHPEADHH@Z)
+graphics.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\kieutiny\source\repos\ThuVien\x64\Debug\ThuVien.exe : fatal error LNK1120: 13 unresolved externals
