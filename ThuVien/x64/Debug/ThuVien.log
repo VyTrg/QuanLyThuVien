@@ -1,0 +1,37 @@
+﻿  main.cpp
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(281,5): warning C4273: 'getch': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(444,30):
+  see previous definition of 'getch'
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(282,5): warning C4273: 'kbhit': inconsistent dll linkage
+  (compiling source file 'main.cpp')
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(450,30):
+  see previous definition of 'kbhit'
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphic.h(15,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(19,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(42,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdanhmucsach.h(11,1): warning C4005: 'MAX': macro redefinition
+  (compiling source file 'main.cpp')
+  E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(2,1):
+  see previous definition of 'MAX'
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdanhmucsach.h(136,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(24,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(59,10): error C4996: 'kbhit': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _kbhit. See online help for details.
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(73,19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
