@@ -1,8 +1,8 @@
 #pragma once
-#ifndef CAUTRUCMUONTRA_H_INCLUDED
-#define CAUTRUCMUONTRA_H_INCLUDED
+//#ifndef CAUTRUCMUONTRA_H_INCLUDED
+//#define CAUTRUCMUONTRA_H_INCLUDED
 
-#pragma once
+//#pragma once
 
 //#include "cautrucdanhmucsach.h"
 //#include "cautrucdausach.h"
@@ -90,7 +90,7 @@ int tinhngay(Ngay ngay);
 void DeleteAll_Mt(Nodemt& head);
 
 //tim cac ma sach
-Nodemt Tim_Ms(Nodemt node, std::string tensach);
+Nodemt Tim_Mt(Nodemt node, std::string tensach);
 
 //so sanh 2 chuoi
 bool SoSanhChuoi(std::string s, std::string t);//s.size < t.size
@@ -317,15 +317,15 @@ int tinhngay(Ngay ngay) {
 	return t;
 }
 
-Nodemt Tim_Ms(Nodemt node, std::string tensach) {
-	std::string temp = MaSach(tensach);
+Nodemt Tim_Mt(Nodemt node, std::string tensach) {
+	std::string temp = ChuanHoaMa(tensach);
 	Nodemt tmp = node;
 	Nodemt tim = NULL;
 	MuonTra MT;
 	while (tmp != NULL) {
-		if (strncmp((char*)temp.c_str(), (char*)tmp->muontra.masach.c_str(), min(temp.size(), tmp->muontra.masach.size()))== 0){
+		if (SoSanhChuoi(tmp->muontra.masach, temp)){
 			MT = tmp->muontra;
-			InsertLast_NodeMuonTra(tim, MT);
+			InsertLast_NodeMuonTra(tim, tmp->muontra);
 		}
 		tmp = tmp->next;
 	}
@@ -333,12 +333,5 @@ Nodemt Tim_Ms(Nodemt node, std::string tensach) {
 
 }
 
-bool SoSanhChuoi(std::string s, std::string t) {
-	for (int i = 0; i < min(s.size(), t.size()); ++i) {
-		if (s[i] != t[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-#endif 
+
+//#endif 

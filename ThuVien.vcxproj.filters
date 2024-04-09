@@ -50,5 +50,8 @@
     <ClInclude Include="muontra.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

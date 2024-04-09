@@ -9,13 +9,16 @@ E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(282,5): warning C427
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(450,30):
   see previous definition of 'kbhit'
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(41,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(40,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucmuontra.h(337,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(96,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(20,1): warning C4102: 'begin': unreferenced label
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(166,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(227,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
 graphics.lib(dibutil.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(dibutil.obj)' or at ''; linking object as if no debug info

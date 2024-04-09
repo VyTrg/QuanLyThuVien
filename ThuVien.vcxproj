@@ -135,6 +135,7 @@
     <ClInclude Include="cautrucmuontra.h" />
     <ClInclude Include="cautructhedocgia.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="dms.h" />
     <ClInclude Include="graphic.h" />
     <ClInclude Include="ham.h" />
     <ClInclude Include="menu.h" />

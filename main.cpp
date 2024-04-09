@@ -2,8 +2,7 @@
 
 #include <iostream>
 #include <string.h>
-//#include <winuser.h>
-//#include <winbgim.h> 
+#include <Windows.h>
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <conio.h>
 #include <stdlib.h>     /* srand, rand */
@@ -12,7 +11,6 @@
 #include "graphics.h"
 #pragma comment(lib, "graphics.lib")
 #include <cstring>
-//#include <windows.h>
 #include <ctime>
 #include <sstream>
 
@@ -21,13 +19,14 @@
 #include "define.h"
 #include "graphic.h"
 #include "cautrucdanhmucsach.h"
-//#include "cautrucdausach.h"
+#include "cautrucdausach.h"
 #include "cautrucmuontra.h"
-//#include "cautructhedocgia.h"
+#include "cautructhedocgia.h"
 //#include "ThongTin.h"
 //#include "mylib.h"
 //#include "menu.h"
 #include "muontra.h"
+#include "dms.h"
 
 /*-------------------Prototype------------------*/
 //xu ly danh muc sach
@@ -49,10 +48,11 @@ void NhapMt(Nodemt& node, MuonTra& mt);
 void XuatMt();
 
 //tim cac ma sach
-void TimCacMaSach();
+void TimCacMaSach(Nodemt node);
 
 //tinh ngay
 //void date();
+
 
 
 int main(int argc, char* argv[])
@@ -61,11 +61,112 @@ int main(int argc, char* argv[])
 	initwindow(w, h, "Quan ly thu vien", 0, 0, 0, 1);
 	
 	//	danhmucsach();	
-	//muontra();
+	//scr_muontra();
 	//	Run_ThongTin();
-	Nodemt node = NULL;
+	Nodedms node = NULL;
+	DS_DauSach list;
+	list.n = 0;
+	DauSach ds;
+	ReadDSDS(list, node);
+	displayDms(list, node);
+
+	/*Nodemt node = NULL;
+	TREE_DG DG = NULL;
+	Read_info(DG);
 	ReadFileMT(node);
-	displayMuonTra(node);
+	displayMuonTra(node, DG);*/
+
+	/*DS_DauSach list;
+	list.n = 0;
+	DauSach ds;
+	ReadDSDS(list);
+	LietKe(list);*/
+	/*int n = 0, luachon;
+	DS_DauSach list;
+	Nodedms node = NULL;
+	DauSach dausach;
+	list.n = 0;
+	string ten;
+	do
+	{
+		InMenu();
+		cin >> luachon;
+		switch (luachon) {
+		case 0:
+			break;
+		case 1:
+		{
+			NhapList(list, 1);
+			break;
+		}
+
+		case 2:
+		{
+			sort_Theotheloai(list);
+			LietKe(list);
+			break;
+		}
+
+
+		case 3: {
+			WriteDSDS(list);
+			break;
+		}
+
+		case 4: {
+			ReadDSDS(list);
+			LietKe(list);
+			break;
+		}
+		case 5: {
+			cout << "Nhap thong tin cho dau sach moi:" << endl;
+
+			if (NhapSach(list, dausach) == 1)
+				InsertDauSach(list, dausach);
+			sort_Theotheloai(list);
+			LietKe(list);
+			break;
+		}
+
+		case 6: {
+			cout << "Tim kiem sach."; cin.ignore();
+			getline(cin, ten);
+			cout << "Thog tin tra cuu duoc: \n";
+			ShowSach(list, ten);
+			break;
+		}
+		case 7: {
+			SuaThongTinSach(list);
+			break;
+		}
+
+		case 8: {
+			LietKe(list);
+			cout << "Nhap ISBN cua sach muon xoa: ";
+			string ISBN;
+			cin.ignore();
+			getline(cin, ISBN);
+			DeleteSach_ISBN(list, ISBN);
+			LietKe(list);
+			break;
+		}
+
+		case 9: {
+			
+			cout << "Thoat chuong trinh.\n";
+			return 0;
+		}
+		default: {
+			cout << "Lua chon khong hop le. Vui long chon lai.\n";
+			break;
+		}
+		}
+
+	} while (true);
+	system("PAUSE");
+	return 0;*/
+
+
 	return 0;
 }
 
@@ -78,7 +179,7 @@ void NhapDms(Nodedms& node) {
 	std::cin.ignore();
 	std::cout << "Nhap dau sach ";
 	std::getline(std::cin, str);
-	str = MaSach(str);
+	//str = MaSach(str);
 	sach.masach = str;
 
 	std::cout << "Nhap trang thai ";
@@ -173,7 +274,7 @@ void muontra() {
 			//			Sleep(600);
 		}
 		else if (chon == 4) {
-			TimCacMaSach();
+			TimCacMaSach(node);
 		}
 		else if (chon == 0)
 			break;
@@ -189,7 +290,7 @@ void NhapMt(Nodemt& node, MuonTra& mt) {
 	std::cin.ignore();
 	std::cout << "Nhap dau sach ";
 	std::getline(std::cin, str);
-	str = MaSach(str);
+	//str = MaSach(str);
 	mt.masach = str;
 
 	std::cout << "Nhap ngay muon ";
@@ -231,25 +332,27 @@ void XuatMt() {
 	}
 }
 
-void TimCacMaSach() {
-	Nodemt node = NULL;
+void TimCacMaSach(Nodemt node) {
 	ReadFileMT(node);
+	//Nodemt temp = node;
+	//int cnt = 0;
 	std::string tensach;
 	std::cin.ignore();  
 	std::cout << "Nhap ten sach can tim: ";   getline(std::cin, tensach);
-	Nodemt temp = Tim_Ms(node, tensach);
+	Nodemt tmp = Tim_Mt(node, tensach);
 	int cnt = 0;
-	if (temp == NULL)
-		std::cout << "Khong tim thay/ sach khong ton tai\n";
-	else {
-		while (temp != NULL) {
+	if (tmp != NULL)
+		while (tmp != NULL) {
 			std::cout << "=======" << cnt + 1 << "======\n";
-			std::cout << "Ma sach:" << temp->muontra.masach << std::endl;
-			std::cout << "Ngay muon:" << temp->muontra.ngaymuon.ngay << "/" << temp->muontra.ngaymuon.thang << "/" << temp->muontra.ngaymuon.nam << std::endl;
-			std::cout << "Ngay tra:" << temp->muontra.ngaytra.ngay << "/" << temp->muontra.ngaytra.thang << "/" << temp->muontra.ngaytra.nam << std::endl;
-			std::cout << "Trang thai:" << temp->muontra.trangthai << std::endl;
-			temp = temp->next;
+			std::cout << "Ma sach:" << tmp->muontra.masach << std::endl;
+			std::cout << "Ngay muon:" << tmp->muontra.ngaymuon.ngay << "/" << tmp->muontra.ngaymuon.thang << "/" << tmp->muontra.ngaymuon.nam << std::endl;
+			std::cout << "Ngay tra:" << tmp->muontra.ngaytra.ngay << "/" << tmp->muontra.ngaytra.thang << "/" << tmp->muontra.ngaytra.nam << std::endl;
+			std::cout << "Trang thai:" << tmp->muontra.trangthai << std::endl;
+			tmp = tmp->next;
 			++cnt;
 		}
+	else {
+		
+		std::cout << "Khong tim thay/ sach khong ton tai\n";
 	}
 }

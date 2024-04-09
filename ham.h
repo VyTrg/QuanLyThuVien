@@ -1,25 +1,19 @@
 #pragma once
 #define M 10
-
+std::string Ma = "000";
 /*-------------------Prototype------------------*/
-//sinh ma sach tu dong
-std::string MaSach(std::string tensach);
-
-//sinh so tu dong
 std::string sotudong();
+std::string MaSach(std::string ma);
+std::string ChuanHoaMa(std::string tensach);
+bool CheckTrung(std::string s, std::string t);
+std::string ChuanHoaChuoi(std::string s);
+int StringToInt(std::string s);
+bool SoSanhChuoi(std::string s, std::string t);
 
-//nhap 
-void Input(int left, int top, int right, int bottom, std::string s);
-
-//hien con tro nhap
-void displayCur(int left, int top, int right, int bottom, std::string s);
-
-//xoa
-//void Delete(int left, int top, int right, int bottom, std::string s);
-
+//std::string LaySo(std::string s);
 /*-------------------Function------------------*/
-std::string MaSach(std::string tensach) {
-	std::string ms = "";
+std::string ChuanHoaMa(std::string tensach) {
+	std::string ma = "";
 
 	bool check = true;
 	int length = tensach.size();
@@ -27,17 +21,22 @@ std::string MaSach(std::string tensach) {
 		if (tensach[i] == ' ')
 			check = true;
 		else if (tensach[i] != ' ' && check == true) {
-			ms.push_back(toupper(tensach[i]));
+			ma.push_back(toupper(tensach[i]));
 			check = false;
 		}
 	}
-	ms = ms + "-" + sotudong();
+	return ma;
+}
+std::string MaSach(std::string tensach) {
+	std::string ms = ChuanHoaMa(tensach);
+	ms = ms + '-' + sotudong();
 	return ms;
 }
 
 std::string sotudong() {
-	int a[M];
-	std::string ma = "";
+	int* a = new int[M];
+begin:
+	std::string m = "";
 	srand(time(NULL));
 	for (int i = 0; i < M; ++i) {
 		a[i] = i + 1;
@@ -49,103 +48,70 @@ std::string sotudong() {
 		a[j] = tmp;
 	}
 	for (int i = 0; i < 2; i++) {
-		ma += std::to_string(a[i]);
+		m += std::to_string(a[i]);
 	}
-	return ma;
-}
-
-void copyCharArr(char exsitArr[], char newArr[], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		newArr[i] = exsitArr[i];
-	}
-}
-void copyCharArr(std::string exsitStr, char newArr[], int n, int m)
-{
-	for (int i = 0; i < m; i++)
-	{
-		newArr[i] = '\00';
-	}
-	for (int i = 0; i < n; i++)
-	{
-		newArr[i] = exsitStr[i];
-	}
+;	delete[] a;
+	if (CheckTrung(Ma, m))
+		goto begin;
+	Ma = m;
+	return m;
 }
 
 //string to integer
 int StringToInt(std::string s)
 {
-	int num = 0;
-	int n = s.length();
-	for (int i = 0; i < n; i++)
-		num = num * 10 + (int(s[i]) - 48);
-	return num;
+	int i;
+	// string -> integer
+	std::istringstream(s) >> i;
+
+	return i;
 }
 
-//hien thi con tro
-void displayCur(std::string s, int left, int top, int right, int bottom) {
-	s[s.size() - 1] = '|';
-	delay(50);
-	outtextxy(left + 10, top + 10, (char*)s.c_str());
-	s[s.size() - 1] = ' ';
-	delay(50);
-	outtextxy(left + 10, top + 10, (char*)s.c_str());
+bool CheckTrung(std::string s, std::string t) {
+	if (s.compare(t) == 0)
+		return true;
+	return false;
 }
 
-//nhap 
-void Input(int left, int top, int right, int bottom, std::string& s, char c) {
-	char tmp = s[s.size() - 1];
-	s[s.size() - 1] = c;
-	s.push_back(tmp);
-	setfillstyle(1, 15);
-	bar(left + 1, top + 1, right - 1, bottom - 1);
-	outtextxy(left + 10, top + 10, (char*)s.c_str());
-}
-
-//xoa
-void Delete(int left, int top, int right, int bottom, std::string& s) {
-	if (s.size() == 1) return;
-	setfillstyle(1, 15);
-	bar(left + 1, top + 1, right - 1, bottom);
-	char tmp = s[s.size() - 1];
-	s.pop_back();
-	s[s.size() - 1] = tmp;
-	outtextxy(left + 10, top + 10, (char*)s.c_str());
-}
-
-//nhap chuoi
-void InputString(int left, int top, int right, int bottom, std::string& s) {
-	setfillstyle(1, 15);
-	setcolor(0);
-	bar(left + 1, top + 1, right - 1, bottom - 1);
-	s += '|';
-	outtextxy(left + 10, top + 10, (char*)s.c_str());
-	char c;
-	while (_kbhit()) char a = _getch();
-	while (1)
-	{
-		setcolor(0);
-		outtextxy(left + 10, top + 10, (char*)s.c_str());
-		if (_kbhit())
-		{
-			c = _getch();
-			if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || (int)c == 32)
-			{
-				Input(left, top, right, bottom, s, c);
-			}
-			else if (c == 8) // backspace
-			{
-				Delete(left, top, right, bottom, s);
-			}
-			//else if (c == 13) // enter
-			//{
-			//	s.pop_back();
-			//	//tao_button(x1, y1, x2, y2, "", 0, 6);
-			//	outtextxy(left + 10, top + 10, (char*)s.c_str());
-			//	break;
-			//}
-		}
-		else displayCur(s, left, top, right, bottom);
+std::string ChuanHoaChuoi(std::string s) {
+	for (char& c : s) {
+		c = toupper(c);
 	}
+	return s;
 }
+
+bool SoSanhChuoi(std::string s, std::string t) {
+	std::string temp = "";
+	for (char& c : s) {
+		if (c != '-')
+			temp += c;
+		else
+			break;
+	}
+	//cout << temp << endl;
+	if (temp.compare(t) == 0)
+		return true;
+	return false;
+}
+
+//std::string LaySo(std::string s) {
+//	std::string so = "";
+//	for (int i = s.size() - 1; i >= 0; --i) {
+//		if (s[i] != '-')
+//			so += s[i];
+//		else
+//			break;
+//	}
+//
+//}
+
+//bool CheckMaSach(Nodedms dms, std::string n) {
+//	Nodedms temp = dms;
+//	while (temp != NULL) {
+//		if (LaySo(temp->sach.masach).compare(n) == 0) {
+//			return false;
+//		}
+//		temp = temp->next;
+//	}
+//	return true;
+//}

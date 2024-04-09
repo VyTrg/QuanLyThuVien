@@ -18,16 +18,7 @@
 //	setcolor(text_color);
 //	setbkcolor(box_color);
 //	outtextxy(x1 + tmp - 25, y1 + (y2 - y1) / 2 - 8, (char*)s.c_str());
-
-char gMasach[30];
-char gMathe[30];
-
-//struct box {
-//	int left, top;
-//	bool check;
-//
-//	void display();
-//};
+void dialog(std::string massage, int color);
 
 struct button {
 	int left;
@@ -115,5 +106,89 @@ void button::display()
 	//outtextxy(left - 25, top + (bottom - top) / 2 - 8, title);
 }
 
+void tao_button(int left, int top, int right, int bottom, std::string s, int text_color, int box_color)
+{
+	int tmp = (right - left - s.size()) / 2;
+	setfillstyle(SOLID_FILL, box_color);
+	bar(left, top, right, bottom);
+	setcolor(text_color);
+	setbkcolor(box_color);
+	outtextxy(left + tmp - 25, top + (bottom - top) / 2 - 8, (char*)s.c_str());
+}
 
+//hien thi con tro
+void displayCur(std::string s, int left, int top, int right, int bottom) {
+	s[s.size() - 1] = '|';
+	delay(50);
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+	s[s.size() - 1] = ' ';
+	delay(50);
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+}
 
+//nhap 
+void Input(int left, int top, int right, int bottom, std::string& s, char c) {
+	char tmp = s[s.size() - 1];
+	s[s.size() - 1] = c;
+	s.push_back(tmp);
+	setfillstyle(SOLID_FILL, CYAN);
+	bar(left + 1, top + 1, right - 1, bottom - 1);
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+}
+
+//xoa
+void Delete(int left, int top, int right, int bottom, std::string& s) {
+	if (s.size() == 1) return;
+	setfillstyle(SOLID_FILL, CYAN);
+	bar(left + 1, top + 1, right - 1, bottom);
+	char tmp = s[s.size() - 1];
+	s.pop_back();
+	s[s.size() - 1] = tmp;
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+}
+
+//nhap chuoi
+void InputString(int left, int top, int right, int bottom, std::string& s) {
+	setfillstyle(SOLID_FILL, CYAN);
+	setcolor(CYAN);
+	bar(left + 1, top + 1, right - 1, bottom - 1);
+	s += '|';
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+	char c;
+	while (_kbhit()) char a = _getch();
+	while (1)
+	{
+		setcolor(15);
+		outtextxy(left + 10, top + 10, (char*)s.c_str());
+		if (_kbhit())
+		{
+			c = _getch();
+			if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || (int)c == 32)
+			{
+				Input(left, top, right, bottom, s, c);
+			}
+			else if (c == 8) // backspace
+			{
+				Delete(left, top, right, bottom, s);
+			}
+			else if (c == 13) // enter
+			{
+				s.pop_back();
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("NHAP THANH CONG", WHITE);
+				break;
+			}
+		}
+		else displayCur(s, left, top, right, bottom);
+	}
+}
+
+void dialog(std::string massage, int color) {
+	setcolor(color);
+	outtextxy(750, 30, (char*)massage.c_str());
+	//bar(750, 30, 850, 30);
+	delay(900);
+	setfillstyle(SOLID_FILL, 3);
+	bar(750, 30, 1200, 70);
+}

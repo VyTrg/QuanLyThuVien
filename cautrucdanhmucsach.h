@@ -1,14 +1,14 @@
-#pragma once
-#ifndef CAUTRUCDANHMUCSACH_H_INCLUDED
-#define CAUTRUCDANHMUCSACH_H_INCLUDED
+//#pragma once
+//#ifndef CAUTRUCDANHMUCSACH_H_INCLUDED
+//#define CAUTRUCDANHMUCSACH_H_INCLUDED
 
 #pragma once
 
-#include "cautrucdausach.h"
+//#include "cautrucdausach.h"
 //#include "cautrucmuontra.h"
 //#include "cautructhedocgia.h"
 
-#define MAX 100000
+#define Max 100000
 
 /*-------------------Prototype-Struct------------------*/
 struct Sach;
@@ -71,6 +71,9 @@ int StringToInt(std::string s);
 
 //xoa tat cac cac node
 void DeleteAll_Dms(Nodedms& node);
+
+//check trung
+Nodedms TrungMaSach(Nodedms dms, std::string masach);
 
 
 /*-------------------Function------------------*/
@@ -179,4 +182,26 @@ void DeleteAll_Dms(Nodedms& node) {
 		delete temp;
 	}
 }
-#endif 
+
+
+Nodedms Tim_Dms(Nodedms node, std::string tensach) {
+	std::string temp = ChuanHoaMa(tensach);
+	Nodedms tmp = node;
+	Nodedms tim = NULL;
+	Sach s;
+	while (tmp != NULL) {
+		if (SoSanhChuoi(tmp->sach.masach, temp)) {
+			s = tmp->sach;
+			InsertLast_NodeDMSach(tim, s);
+		}
+		tmp = tmp->next;
+	}
+	return tim;
+
+}
+//Nodedms TrungMaSach(Nodedms dms, std::string masach) {
+//	if (dms == NULL || dms->sach.masach.compare(masach) == 0)
+//		return dms;
+//	return Nodedms(dms->next, masa);
+//}
+//#endif 
