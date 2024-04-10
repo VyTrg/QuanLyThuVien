@@ -21,25 +21,35 @@ void scr_sua() {
 	tableDms_suaxoa();
 }
 
-void scr_xem() {
+void scr_xemthem() {
 	setfillstyle(SOLID_FILL, 3);
 	bar(0, 60, w, h);
 	tableDms();
 	outtextxy(870, 370, (char*)"THEM DANH MUC SACH");
+	outtextxy(755, 410, (char*)"TEN SACH");
+	rndConnerRect(870, 400, 1200, 430, 1);
+	outtextxy(755, 460, (char*)"MA SACH ");
+	outtextxy(755, 510, (char*)"TRANG THAI ");
+	outtextxy(755, 560, (char*)"VI TRI");
+	outtextxy(900, 560, (char*)"NGAN");
+	outtextxy(1050, 560, (char*)"KE");
+	rndConnerRect(970, 560, 1030, 590, 1);//ngan
+	rndConnerRect(1100, 560, 1160, 590, 1);//ke
 }
 
-void scr_them() {
-	setfillstyle(SOLID_FILL, 3);
-	bar(0, 60, w, h);
-	setbkcolor(CYAN);
-	setcolor(WHITE);
-	outtextxy(w / 2 - 100, 100, (char*)"THEM DANH MUC SACH");
-	outtextxy(300, 160, (char*)"TEN SACH ");
-	rndConnerRect(450, 150, 900, 200, 1);
-	outtextxy(300, 260, (char*)"MA SACH ");
-	outtextxy(300, 360, (char*)"TRANG THAI ");
-	outtextxy(300, 460, (char*)"VI TRI ");
-}
+//void scr_them() {
+//	setfillstyle(SOLID_FILL, 3);
+//	bar(0, 60, w, h);
+//	setbkcolor(CYAN);
+//	setcolor(WHITE);
+//	outtextxy(w / 2 - 100, 100, (char*)"THEM DANH MUC SACH");
+//	outtextxy(300, 160, (char*)"TEN SACH ");
+//	rndConnerRect(450, 150, 900, 200, 1);
+//	//tao_button(450, 150, 900, 200, "", 0, 15);
+//	outtextxy(300, 260, (char*)"MA SACH ");
+//	outtextxy(300, 360, (char*)"TRANG THAI ");
+//	outtextxy(300, 460, (char*)"VI TRI ");
+//}
 
 void in_themdms(DS_DauSach& DSDS, int check, std::string tensach) {
 	Sach s;
@@ -64,10 +74,19 @@ void in_themdms(DS_DauSach& DSDS, int check, std::string tensach) {
 	InsertLast_NodeDMSach(DSDS.data[check]->First, s);
 }
 
+void xoa_dms() {
+	for (int i = 145; i <= 290; i += 40) {
+		setfillstyle(SOLID_FILL, 3);
+		bar(785, i, 880, i + 40);
+		bar(895, i, 1040, i + 40);
+		bar(1055, i, 1190, i + 40);
+	}
+}
+
 void in_dms(Nodedms node) {
 	Nodedms in = node;
 	std::string trangthai;
-	for (int i = 220; i <= 580; i += 40) {
+	for (int i = 140; i <= 290; i += 40) {
 		setbkcolor(3);
 		setcolor(15);
 		if (in != NULL) {
@@ -169,8 +188,8 @@ void tableDms() {
 	setbkcolor(3);
 	settextstyle(BOLD_FONT, HORIZ_DIR, 2);
 	outtextxy(800, 70, (char*)"TEN SACH ");
-	//setcolor(15);
-	rndConnerRect(900, 60, 1180, 90, 1);
+	setcolor(15);
+	rndConnerRect(900, 60, 1180, 100, 1);
 	outtextxy(800, 120, (char*)"MA SACH");
 	outtextxy(900, 120, (char*)"TRANG THAI");
 	outtextxy(1100,	120, (char*)"VI TRI");
@@ -191,15 +210,17 @@ void displayDms(DS_DauSach& DSDS, Nodedms& node){
 	//butn();
 	std::string tensach_xem = "";
 	std::string tensach_them = "";
+	std::string ngan_them = "";
+	std::string ke_them = "";
 	button btnMenu(10, 10, 250, 50, WHITE, 1);
 	btnMenu.setTitle((char*)"< MENU", BLACK, 3);
 	btnMenu.display();
-	button btnXem(290, 10, 350, 50, WHITE, 1);
-	btnXem.setTitle((char*)"XEM", BLACK, 3);
-	btnXem.display();
-	button btnThem(390, 10, 450, 50, WHITE, 1);
+	button btnXemThem(290, 10, 430, 50, WHITE, 1);
+	btnXemThem.setTitle((char*)"THEM DMS", BLACK, 3);
+	btnXemThem.display();
+	/*button btnThem(390, 10, 450, 50, WHITE, 1);
 	btnThem.setTitle((char*)"THEM", BLACK, 3);
-	btnThem.display();
+	btnThem.display();*/
 	button btnSua(490, 10, 550, 50, WHITE, 1);
 	btnSua.setTitle((char*)"SUA", BLACK, 3);
 	btnSua.display();
@@ -210,63 +231,113 @@ void displayDms(DS_DauSach& DSDS, Nodedms& node){
 	btnTruocDms_xem.setTitle((char*)"< TRUOC", BLACK, 2);
 	button btnSauDms_xem(1110, 330, 1200, 360, WHITE, 1);
 	btnSauDms_xem.setTitle((char*)"SAU >", BLACK, 2);
+	button btnThemdms(1150, 620, 1200, 660, WHITE, 1);
+	btnThemdms.setTitle((char*)"THEM", BLACK, 2);
+	button btnHuyThemdms(760, 620, 810, 660, WHITE, 1);
+	btnHuyThemdms.setTitle((char*)"HUY", BLACK, 2);
 
+	Sach s;
 	int check;
 	
 	while (1) {
 		if (ismouseclick(WM_LBUTTONDOWN)) {
 			int pos_x, pos_y;
 			getmouseclick(WM_LBUTTONDOWN, pos_x, pos_y);
-			bool xemClick = pos_x >= 290 && pos_x <= 350 && pos_y >= 10 && pos_y <= 50;
-			bool themClick = pos_x >= 390 && pos_x <= 450 && pos_y >= 10 && pos_y <= 50;
+
+			//chuyen man hinh chuc nang trong dms
+			bool xemthemClick = pos_x >= 290 && pos_x <= 430 && pos_y >= 10 && pos_y <= 50;
+			//bool themClick = pos_x >= 390 && pos_x <= 450 && pos_y >= 10 && pos_y <= 50;
 			bool suaClick = pos_x >= 490 && pos_x <= 550 && pos_y >= 10 && pos_y <= 50;
 			bool xoaClick = pos_x >= 590 && pos_x <= 650 && pos_y >= 10 && pos_y <= 50;
-			if (xemClick) {
-				scr_xem();
+			if (xemthemClick) {
+				scr_xemthem();
+				btnSauDms_xem.display();
+				btnTruocDms_xem.display();
+				btnThemdms.display();
+				btnHuyThemdms.display();
 				tableDausach(DSDS);
 				in_dsds(DSDS);
-				btnTruocDms_xem.display();
-				btnSauDms_xem.display();
 			}
-			if (themClick) {
+			/*if (themClick) {
 				scr_them();
-			}
+			}*/
 			if (suaClick) {
 				scr_sua();
-				
 			}
 			if (xoaClick) {
 				scr_xoa();
 			}
-			bool tensach_xemclick = pos_x >= 900 && pos_x <= 1180 && pos_y >= 100 && pos_y <= 140;
+
+			//man hinh them/xem dms
+			bool tensach_xemclick = pos_x >= 900 && pos_x <= 1180 && pos_y >= 60 && pos_y <= 90;
 			if (tensach_xemclick) {
-					tensach_xem = "";
-					InputString(910, 110, 1180, 140, tensach_xem);
+				xoa_dms();
+				InputString(900, 60, 1180, 90, tensach_xem);
+				if (tensach_xem != "") {
 					check = Search(DSDS, ChuanHoaChuoi(tensach_xem));
-					if(check == -1)
+					if (check == -1)
 						dialog("KHONG TIM THAY SACH, NHAP LAI", RED);
 					else {
 						Nodedms t = Tim_Dms(DSDS.data[check]->First, tensach_xem);
 						in_dms(t);
+						tensach_xem = "";
 					}
-			}
-
-			bool tensach_themclick = pos_x >= 450 && pos_x <= 900 && pos_y >= 160 && pos_y <= 200;
-			if (tensach_themclick) {
-				tensach_them = "";
-				InputString(460, 150, 900, 200, tensach_them);
-				check = Search(DSDS, ChuanHoaChuoi(tensach_them));
-				if ( check == -1)
-					dialog("KHONG TIM THAY SACH, NHAP LAI", RED);
-				else {
-					in_themdms(DSDS, check, tensach_them);
-					dialog("DA THEM THANH CONG", WHITE);
 				}
 			}
+
+			bool tensach_themclick = pos_x >= 870 && pos_x <= 1200 && pos_y >= 400 && pos_y <= 430;
+			if (tensach_themclick) {
+				//xoa_dms();
+				InputString(880, 400, 1200, 430, tensach_them);
+				if (tensach_them != "") {
+					check = Search(DSDS, ChuanHoaChuoi(tensach_them));
+					if (check == -1)
+						dialog("KHONG TIM THAY SACH, NHAP LAI", RED);
+					else {
+						s.masach = MaSach(tensach_them);
+						s.trangthai = 0;
+						outtextxy(900, 460, (char*)s.masach.c_str());
+						outtextxy(900, 510, (char*)"MUON DUOC");
+
+					}
+				}
+			}
+
+			bool ngan_themclick = pos_x >= 970 && pos_x <= 1030 && pos_y >= 560 && pos_y <= 590;
+			bool ke_themclick = pos_x >= 1100 && pos_x <= 1160 && pos_y >= 560 && pos_y <= 590;
+			if (ngan_themclick) {
+				InputNumber(980, 560, 1030, 590, ngan_them);
+				s.vitri = "NGAN " + ngan_them;
+			}
+			if (ke_themclick) {
+				InputNumber(1110, 560, 1160, 590, ke_them);
+				s.vitri += " KE " + ke_them;
+				
+			}
+
+			bool xacnhanThemdms = pos_x >= 1150 && pos_x <= 1200 && pos_y >= 620 && pos_y <= 660;
+			bool xacnhanHuydms = pos_x >= 760 && pos_x <= 810 && pos_y >= 620 && pos_y <= 660;
+			if (xacnhanThemdms) {
+				InsertLast_NodeDMSach(DSDS.data[check]->First, s);
+				dialog("THEM THANH CONG", WHITE);
+				outtextxy(910, 70, (char*)DSDS.data[check]->tensach.c_str());
+				xoa_dms();
+				in_dms(DSDS.data[check]->First);
+				tensach_them = "";
+			}
+			if (xacnhanHuydms) {
+				setfillstyle(SOLID_FILL, 3);
+				bar(880, 404, 1200, 430);
+				tensach_them = "";
+				ngan_them = "";
+				ke_them = "";
+				dialog("HUY NHAP", RED);
+			}
+			//man hinh xoa/sua dms
 			clearmouseclick(WM_LBUTTONDOWN);
 		}
 	}
 	
 	
-	//_getch();
+	_getch();
 }

@@ -67,13 +67,13 @@ void WriteFileDMS(Nodedms &node);
 void ReadFileDMS(Nodedms& node);
 
 //string to integer
-int StringToInt(std::string s);
+//int StringToInt(std::string s);
 
 //xoa tat cac cac node
 void DeleteAll_Dms(Nodedms& node);
 
 //check trung
-Nodedms TrungMaSach(Nodedms dms, std::string masach);
+//Nodedms TrungMaSach(Nodedms dms, std::string masach);
 
 
 /*-------------------Function------------------*/

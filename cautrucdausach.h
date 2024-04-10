@@ -326,7 +326,7 @@ void ReadDSDS(DS_DauSach& DSDS, Nodedms& node) {
 	fileDMS.open("dms.txt", ios::in);
 	fileDS >> DSDS.n;
 	for (int i = 0; i < DSDS.n; i++) {
-		fileDS.ignore();
+		//fileDS.ignore();
 		DSDS.data[i] = new DauSach;
 		DauSach ds;
 		getline(fileDS, str, ','); ds.ISBN = str; // xac dinh vi tri n byte ve sau cua doi tuong byte

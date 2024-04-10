@@ -1,5 +1,5 @@
 #pragma once
-
+#pragma warning( disable : 4996 )
 //#include <winbgim.h>
 //#include "define.h"
 
@@ -155,15 +155,59 @@ void InputString(int left, int top, int right, int bottom, std::string& s) {
 	s += '|';
 	outtextxy(left + 10, top + 10, (char*)s.c_str());
 	char c;
-	while (_kbhit()) char a = _getch();
+	while (kbhit()) char a = getch();
+	while (1)
+	{
+		setcolor(15);
+		delay(50);
+		outtextxy(left + 10, top + 10, (char*)s.c_str());
+		if (kbhit())
+		{
+			c = getch();
+			if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || (int)c == 32)
+			{
+				Input(left, top, right, bottom, s, c);
+			}
+			else if (c == 8) // backspace
+			{
+				Delete(left, top, right, bottom, s);
+			}
+			else if (c == 13 && s != "|") // enter
+			{
+				s.pop_back();
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("NHAP THANH CONG", WHITE);
+				break;
+			}
+			else if (c == 27) {
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				s = "";
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("HUY NHAP", RED);
+				break;
+			}
+		}
+		else displayCur(s, left, top, right, bottom);
+	}
+}
+
+void InputNumber(int left, int top, int right, int bottom, std::string& s) {
+	setfillstyle(SOLID_FILL, CYAN);
+	setcolor(CYAN);
+	bar(left + 1, top + 1, right - 1, bottom - 1);
+	s += '|';
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+	char c;
+	while (kbhit()) char a = getch();
 	while (1)
 	{
 		setcolor(15);
 		outtextxy(left + 10, top + 10, (char*)s.c_str());
-		if (_kbhit())
+		if (kbhit())
 		{
-			c = _getch();
-			if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || (int)c == 32)
+			c = getch();
+			if (c >= '0' && c <= '9')
 			{
 				Input(left, top, right, bottom, s, c);
 			}
@@ -179,6 +223,13 @@ void InputString(int left, int top, int right, int bottom, std::string& s) {
 				dialog("NHAP THANH CONG", WHITE);
 				break;
 			}
+			else if (c == 27) {
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				s = "";
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("HUY NHAP", RED);
+				break;
+			}
 		}
 		else displayCur(s, left, top, right, bottom);
 	}
@@ -190,5 +241,5 @@ void dialog(std::string massage, int color) {
 	//bar(750, 30, 850, 30);
 	delay(900);
 	setfillstyle(SOLID_FILL, 3);
-	bar(750, 30, 1200, 70);
+	bar(750, 20, 1200, 55);
 }
