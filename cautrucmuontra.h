@@ -1,337 +1,550 @@
 #pragma once
-//#ifndef CAUTRUCMUONTRA_H_INCLUDED
-//#define CAUTRUCMUONTRA_H_INCLUDED
 
-//#pragma once
+using std::cout;
+using std::string;
+using std::endl;
+using std::ofstream;
+using std::ios_base;
+using std::ifstream;
+using std::max;
 
-//#include "cautrucdanhmucsach.h"
-//#include "cautrucdausach.h"
-//#include "cautructhedocgia.h"
+int nDG;
+string ma = "00000";
 
-/*-------------------Prototype-Struct------------------*/
-//struct MuonTra;
-//struct NodeMuonTra;
+struct DocGia
+{
+	string MATHE;
+	string ho;
+	string ten;
+	string phai;
+	int trangThai;
+	//0 the bi khoa
+	//1 the dang hoat dong
 
-/*-------------------Struct------------------*/
-struct Ngay {
-	int ngay;
-	int thang;
-	int nam;
+	Nodemt node = NULL;
+	int muon;//dem muon ma sach
 };
 
-struct MuonTra {
-	std::string masach;
-	Ngay ngaymuon;
-	Ngay ngaytra;
-	int trangthai;
+struct NodeDocGia
+{
+
+	DocGia docgia;
+	NodeDocGia* pLeft = NULL;
+	NodeDocGia* pRight = NULL;
+
+	//    LIST_MT = mt;
 };
 
-struct NodeMuonTra {
-	MuonTra muontra;
-	NodeMuonTra* next;
-	NodeMuonTra* previous;
-};
-
-typedef struct NodeMuonTra* Nodemt;
-
-/*trang thai muon tra
- * dangmuon(chua tra) = 0
- * datra = 1
- * matsach = 2
- */
-enum TrangThai_MT {
-	DangMuon,//0
-	DaTra,//1
-	MatSach,//2
-};
+typedef struct NodeDocGia NODE_DG;
+typedef NODE_DG* TREE_DG;
 
 
-/*-------------------Prototype------------------*/
-//tao node muon tra
-Nodemt CreateNodeMuonTra(MuonTra mt);
+// ===============prototype===========================
 
-//them vao dau ll muon tra
-void InsertFirst_NodeMuonTra(Nodemt& head, MuonTra mt);
+void KhoiTao(TREE_DG& t); //khoi tao cay
+bool IsEmpty(TREE_DG t); //check rong
+DocGia* Create_DG(); //tao doc gia
+TREE_DG GetNode_DG(DocGia dg); //lay node doc gia
+void InsertDGtoTree(TREE_DG& t, DocGia dg); //them doc gia vao cay
+int countDG(TREE_DG t); //dem node
+TREE_DG checkMT(TREE_DG t, string a); //check trung
+string RandomMT(TREE_DG t); //ramdon ma the
+TREE_DG FindMin(TREE_DG t); //tìm min
+TREE_DG Find_DG(TREE_DG t, string MATHE); //tim doc gia theo mathe
+bool IsDeleted_DG(TREE_DG& t, string MT); //check xoa doc gia ton tai
+int height(TREE_DG t); //chieu cao cay
+bool checkAVL(TREE_DG t); //kiem tra cay AVL
+TREE_DG XoayPhai(TREE_DG a); //xoay phai
+TREE_DG XoayTrai(TREE_DG a); //xoay trai
+TREE_DG cap_nhap_AVL(TREE_DG& t); //cap nhap
+void Push_info(TREE_DG t, ofstream& outfileDG, ofstream& outfileMT); //them vao file
+void Write_info(TREE_DG t, int sl); //ghi file
+void Read_info(TREE_DG& t); //doc file
+void FreeMemory(TREE_DG t); //giai phong bo nho
 
-//them vao cuoi ll muon tra
-void InsertLast_NodeMuonTra(Nodemt& head, MuonTra mt);
-
-//them vao sau node co dia chi p
-void InsertRight_NodeMuonTra(Nodemt& head, Nodemt p, MuonTra mt);
-
-//them vao truoc node co dia chi p
-void InsertLeft_NodeMuonTra(Nodemt& head, Nodemt p, MuonTra mt);
-
-//xoa phan tu dau tien
-void DeleteFirst_NodeMuonTra(Nodemt& head, MuonTra mt);
-
-//xoa phan tu cuoi cung
-void DeleteLast_NodeMuonTra(Nodemt& head, MuonTra mt);
-
-//tao file va ghi du lieu vao file
-void WriteFileMT(Nodemt &node);
-
-//doc du lieu tu file
-void ReadFileMT(Nodemt& node);
-
-//dinh danh ngay
-std::string DinhDangNgay(Ngay ngay);
-
-//tinh ngay muon tra
-int TinhNgay(Ngay muon, Ngay tra);
-
-//tinh nam nhuan
-int NamNhuan(int nam);
-
-//tinh ngay
-int tinhngay(Ngay ngay);
-
-//xoa tat cac cac node
-void DeleteAll_Mt(Nodemt& head);
-
-//tim cac ma sach
-Nodemt Tim_Mt(Nodemt node, std::string tensach);
-
-//so sanh 2 chuoi
-bool SoSanhChuoi(std::string s, std::string t);//s.size < t.size
-
-///*-------------------Function------------------*/
-Nodemt CreateNodeMuonTra(MuonTra mt) {
-	Nodemt p = new NodeMuonTra();
-	p->muontra = mt;
-	return p;
+string chuanhoa_name(string ten)
+{
+	string name = "";
+	for (int i = 0; i < ten.size(); i++)
+	{
+		if (ten[i] >= 'A' && ten[i] <= 'Z')
+			ten[i] += 32;
+	}
+	for (int i = 0; i < ten.size(); i++)
+	{
+		if (i != 0 && ten[i] == ' ' && ten[i - 1] != ' ')
+			name += ten[i];
+		else if (ten[i] >= 'a' && ten[i] <= 'z')
+			name += ten[i];
+	}
+	if (name[name.size() - 1] == ' ') name.pop_back();
+	name[0] -= 32;
+	for (int i = 1; i < name.size(); i++)
+	{
+		if (i != name.size() - 1 && name[i] == ' ')
+			name[i + 1] -= 32;
+	}
+	return name;
 }
 
-void InsertFirst_NodeMuonTra(Nodemt& head, MuonTra mt) {
-	Nodemt newnode = CreateNodeMuonTra(mt);
-	newnode->next = head;
-	if (head != NULL)
-		head->previous = newnode;
-	head = newnode;
+bool kt_chuoi_rong(string s)
+{
+	if (s.empty() == true) return true;
+	bool check = true;
+	for (int i = 0; i < s.size(); i++) if (s[i] != ' ') check = false;
+	if (check == true) return true;
+	for (int i = 0; i < s.size(); i++)
+	{
+		if ((s[i] < '0' || (s[i] > '9' && s[i] < 'A') || (s[i] > 'Z' && s[i] < 'a') || s[i] > 'z') && s[i] != ' ') return true;
+	}
+	return false;
 }
 
-void InsertLast_NodeMuonTra(Nodemt& head, MuonTra mt) {
-	Nodemt newnode = CreateNodeMuonTra(mt);
-	if (head == NULL)
-		head = newnode;
-	else {
-		Nodemt tail = head;
-		while (tail->next != NULL)
-			tail = tail->next;
-		tail->next = newnode;
-		newnode->previous = tail;
-		tail = newnode;
+void KhoiTao(TREE_DG& t) {
+	t = NULL;
+	nDG = 0;
+}
+
+bool IsEmpty(TREE_DG t)
+{
+	return t == NULL;
+}
+
+DocGia* Create_DG()
+{
+	DocGia* newNode = new DocGia;
+	newNode->MATHE = "";
+	newNode->ho = "";
+	newNode->ten = "";
+	newNode->phai = "";
+	newNode->trangThai = -1;
+	newNode->muon = 0;
+
+	return newNode;
+}
+
+void XuatDG(DocGia dg)
+{
+	cout << dg.MATHE << endl;
+	cout << dg.ho << endl;
+	cout << dg.ten << endl;
+	cout << dg.phai << endl;
+	cout << dg.trangThai << endl;
+	cout << dg.muon << endl;
+	while (dg.node != NULL) {
+		std::cout << dg.node->muontra.masach << std::endl;
+		std::cout << DinhDangNgay(dg.node->muontra.ngaymuon) << std::endl;
+		std::cout << DinhDangNgay(dg.node->muontra.ngaytra) << std::endl;
+		std::cout << dg.node->muontra.trangthai;
+		dg.node = dg.node->next;
+		std::cout << std::endl;
 	}
 }
 
-void InsertRight_NodeMuonTra(Nodemt& head, Nodemt p, MuonTra mt) {
-	if (p == NULL)
-		std::cout << "Node p khong ton tai, khong the them\n";
-	else {//them newnode vao sau node p, r la node sau node p
-		Nodemt newnode = CreateNodeMuonTra(mt);
-		Nodemt r = p->next;
-		//noi r voi newnode
-		r->previous = newnode;
-		newnode->next = r;
-		//noi p voi newnode
-		p->next = newnode;
-		newnode->previous = p;
+void DuyetLNR(TREE_DG t)
+{
+	if (t != NULL)
+	{
+		DuyetLNR(t->pLeft);
+		//arr[sl++] = t;
+		XuatDG(t->docgia);
+		DuyetLNR(t->pRight);
 	}
 }
 
-
-void InsertLeft_NodeMuonTra(Nodemt& head, Nodemt p, MuonTra mt) {
-	if (p == NULL)
-		std::cout << "Node p khong ton tai, khong the them\n";
-	else {//them newnode vao truoc node p, r la node truoc node p
-		Nodemt newnode = CreateNodeMuonTra(mt);
-		Nodemt r = p->previous;
-		//noi node r va newnode
-		r->next = newnode;
-		newnode->previous = r;
-		//noi node p va newnode
-		newnode->next = p;
-		p->previous = newnode;
-	}
-}
-
-void DeleteFirst_NodeMuonTra(Nodemt& head, MuonTra mt) {
-	if (head == NULL)
-		std::cout << "Khong the xoa\n";
-	else {
-		Nodemt xoa = head;
-		head = head->next;
-		head->previous = NULL;
-		delete xoa;
-	}
-}
-
-void DeleteLast_NodeMuonTra(Nodemt& head, MuonTra mt) {
-	if (head == NULL)
-		std::cout << "Khong the xoa\n";
-	else {
-		Nodemt tail = head;
-		while (tail->next != NULL)
-			tail = tail->next;
-		Nodemt xoa = tail;
-		tail = tail->previous;
-		tail->next = NULL;
-		delete xoa;
-	}
-}
-
-void DeleteAll_Mt(Nodemt& head) {
-	Nodemt xoa;
-	while (head != NULL) {
-		xoa = head;
-		head = head->next;
-		delete xoa;
-	}
-}
-
-void WriteFileMT(Nodemt& node) {
-	std::ofstream file;
-	file.open("mt.txt", std::ios::out);
-	if (!file)
-		std::cout << "khong tim thay file\n";
-	else {
-		std::cout << "dang luu vao file\n";
-		Nodemt temp = node;
-		while (temp != NULL) {
-			file << temp->muontra.masach << ",";
-			file << temp->muontra.ngaymuon.ngay << "," << temp->muontra.ngaymuon.thang << "," << temp->muontra.ngaymuon.nam << ",";
-			file << temp->muontra.ngaytra.ngay << "," << temp->muontra.ngaytra.thang << "," << temp->muontra.ngaytra.nam << ",";
-			file << temp->muontra.trangthai << std::endl;
-			temp = temp->next;
-		}
-		file.close();
-	}
-}
-
-void ReadFileMT(Nodemt& node) {
-	std::ifstream file("mt.txt", std::ios::in);
-	std::string str;
-	int n;
-	DeleteAll_Mt(node);
-	MuonTra mt;
-	if (file.is_open()) {
-		while (file.eof() == false) {
-
-			//ma sach
-			getline(file, str, ',');
-			mt.masach = str;
-			if (str.empty())
-				break;
-
-			//ngay muon
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.ngay = n;
-			
-			
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.thang = n;
-
-			
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.nam = n;
-
-			//ngay tra
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.ngay = n;
-
-
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.thang = n;
-
-
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.nam = n;
-
-			//trang thai
-			getline(file, str);
-			n = StringToInt(str);
-			mt.trangthai = n;
-
-		InsertLast_NodeMuonTra(node, mt);	
+void xep_noi_botten(NODE_DG** arr, int sl)
+{
+	for (int i = 0; i < sl - 1; i++)
+	{
+		for (int j = 0; j < sl - i - 1; j++)
+		{
+			if (arr[j]->docgia.ten.compare(arr[j + 1]->docgia.ten) > 0)
+			{
+				NODE_DG* temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
 		}
 	}
-	else {
-		std::cout << "Khong the doc duoc file.\n";
-	}
-	file.close();
 }
 
-std::string DinhDangNgay(Ngay ngay) {
-	std::string n = "";
-	if (ngay.ngay < 10 && ngay.ngay > 0)
-		n = "0" + std::to_string(ngay.ngay) + "/";
+void xep_noi_botMATHE(NODE_DG** arr, int sl)
+{
+	for (int i = 0; i < sl - 1; i++)
+	{
+		for (int j = 0; j < sl - i - 1; j++)
+		{
+			if (arr[j]->docgia.MATHE.compare(arr[j + 1]->docgia.MATHE) > 0)
+			{
+				NODE_DG* temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+TREE_DG GetNode_DG(DocGia dg)
+{
+	NODE_DG* p = new NODE_DG;
+	if (p == NULL) {
+		return NULL;
+	}
+	// khoi tao danh muc sach trong node doc gia
+
+	p->docgia = dg;
+	p->pLeft = p->pRight = NULL;
+	return (p);
+}
+
+void InsertDGtoTree(TREE_DG& t, DocGia dg)
+{
+	/// tang doc gia len 1
+	if (t == NULL) {
+		t = GetNode_DG(dg);
+		++nDG;
+	}
+	else if (dg.MATHE.compare(t->docgia.MATHE) < 0)
+	{
+		InsertDGtoTree(t->pLeft, dg);
+	}
 	else
-		n = std::to_string(ngay.ngay) + "/";
+	{
+		InsertDGtoTree(t->pRight, dg);
+	}
+}
 
-	if (ngay.thang < 10 && ngay.thang > 0)
-		n += "0" + std::to_string(ngay.thang) + "/";
+int countDG(TREE_DG t)
+{
+	int c = 1;             // ban than node duoc dem la 1;
+	if (t == NULL)
+		return 0;
 	else
-		n = std::to_string(ngay.thang) + "/";
-
-	n += std::to_string(ngay.nam);
-	return n;
-}
-
-int TinhNgay(Ngay muon, Ngay now) {
-	int t = tinhngay(now);
-	int m = tinhngay(muon);
-	return (t - m);
-}
-
-int NamNhuan(int nam) {
-	if (nam % 400 == 0 || (nam % 4 == 0 && nam % 4 != 0))
-		return 366;
-	return 365;
-}
-
-int tinhngay(Ngay ngay) {
-	int ngaynhuan[13] = { 0,
-							31,29,31,30,31,30,
-							31,31,30,31,30,31 };
-	int khongnhuan[13] = { 0,
-							31,28,31,30,31,30,
-							31,31,30,31,30,31 };
-	int t = ngay.ngay;
-	for (int i = 1; i < ngay.nam; ++i)
-		t += NamNhuan(i);
-	if (NamNhuan(ngay.nam) == 365) {
-		for (int i = 1; i < ngay.thang; ++i)
-			t += khongnhuan[i];
+	{
+		c += countDG(t->pLeft);
+		c += countDG(t->pRight);
+		return c;
 	}
-	else if (NamNhuan(ngay.nam) == 366) {
-		for (int i = 1; i < ngay.thang; ++i)
-			t += ngaynhuan[i];
-	}
+}
 
+bool check_trung(TREE_DG t, string a)
+{
+	if (t == NULL)
+		return false;
+	else if (t->docgia.MATHE.compare(a) > 0)
+		return check_trung(t->pLeft, a);
+	else if (t->docgia.MATHE.compare(a) < 0)
+		return check_trung(t->pRight, a);
+	else
+		return true;
+}
+
+TREE_DG checkMT(TREE_DG t, string a)
+{
+	if (t == NULL || t->docgia.MATHE.compare(a) == 0)
+		return t;
+	else if (t->docgia.MATHE.compare(a) > 0)
+		return checkMT(t->pLeft, a);
+	else
+		return checkMT(t->pRight, a);
+}
+
+string RandomMT(TREE_DG t)
+{
+	srand(time(NULL));
+	do
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			ma[i] = rand() % (57 - 48 + 1) + 48;
+			// random tmp[i] thuoc doan [0, 9]
+			// doan [0, 9] co ma ascii tu 48 - 57
+		}
+	} while (checkMT(t, ma) != NULL);
+	return ma;
+}
+
+TREE_DG FindMin(TREE_DG t)
+{
+	while (t->pLeft != NULL) t = t->pLeft;
+	return (t);
+}
+
+TREE_DG Find_DG(TREE_DG t, string MATHE)
+{
+	while (t != NULL && t->docgia.MATHE != MATHE)
+	{
+		if (MATHE < t->docgia.MATHE)
+		{
+			t = t->pLeft;
+		}
+		else t = t->pRight;
+	}
+	return (t);
+}
+
+TREE_DG Deleted_DG(TREE_DG& t, string MT)
+{
+	if (t == NULL)
+		return t;
+	else if (MT.compare(t->docgia.MATHE) > 0)
+		t->pRight = Deleted_DG(t->pRight, MT);
+	else if (MT.compare(t->docgia.MATHE) < 0)
+		t->pLeft = Deleted_DG(t->pLeft, MT);
+	else
+	{
+		// Wohoo... I found you, Get ready to be deleted
+
+		   //case 1: No child
+		if (t->pLeft == NULL && t->pRight == NULL)
+		{
+			delete t; // dangling pointer
+			t = NULL;
+			nDG--;
+		}
+		else if (t->pLeft == NULL)// case 2: One child
+		{
+			NODE_DG* temp = t;
+			t = t->pRight;
+			delete temp;
+			nDG--;
+		}
+		else if (t->pRight == NULL)
+		{
+			NODE_DG* temp = t;
+			t = t->pLeft;
+			delete temp;
+			nDG--;
+		}// Case 3: 2 children
+		else {
+			NODE_DG* temp = FindMin(t->pRight);
+
+			// copy du lieu vao .
+			t->docgia = temp->docgia;
+			//t->mt = temp->mt;
+			t->pRight = Deleted_DG(t->pRight, temp->docgia.MATHE);
+		}
+
+	}
 	return t;
 }
 
-Nodemt Tim_Mt(Nodemt node, std::string tensach) {
-	std::string temp = ChuanHoaMa(tensach);
-	Nodemt tmp = node;
-	Nodemt tim = NULL;
-	MuonTra MT;
-	while (tmp != NULL) {
-		if (SoSanhChuoi(tmp->muontra.masach, temp)){
-			MT = tmp->muontra;
-			InsertLast_NodeMuonTra(tim, tmp->muontra);
-		}
-		tmp = tmp->next;
-	}
-	return tim;
+bool IsDeleted_DG(TREE_DG& t, string MT)
+{
+	if (t == NULL)
+		return false;
+	else
+	{
+		if (MT.compare(t->docgia.MATHE) > 0)
+			return IsDeleted_DG(t->pRight, MT);
+		else if (MT.compare(t->docgia.MATHE) < 0)
+			return IsDeleted_DG(t->pLeft, MT);
+		else // Wohoo... I found you, Get ready to be deleted
+		{
+			//case 1: No child
+			if (t->pLeft == NULL && t->pRight == NULL)
+			{
+				delete t; // dangling pointer
+				t = NULL;
+				nDG--;
+			}
+			else if (t->pLeft == NULL)// case 2: One child
+			{
+				NODE_DG* temp = t;
+				t = t->pRight;
+				delete temp;
+				nDG--;
+			}
+			else if (t->pRight == NULL)
+			{
+				NODE_DG* temp = t;
+				t = t->pLeft;
+				delete temp;
+				nDG--;
+			}// Case 3: 2 children
+			else {
+				NODE_DG* temp = FindMin(t->pRight);
 
+				// copy du lieu vao .
+				t->docgia = temp->docgia;
+				//				t->mt = temp->mt;
+				return IsDeleted_DG(t->pRight, temp->docgia.MATHE);
+			}
+			return true;
+		}
+	}
 }
 
+//===============Chuyen cay nhi phan sang cay AVL======================
+int height(TREE_DG t)
+{
+	if (t == NULL) return -1;
+	return max(height(t->pLeft), height(t->pRight)) + 1;
+}
 
-//#endif 
+bool checkAVL(TREE_DG t)
+{
+	if (t == NULL) return true;
+	if (abs(height(t->pLeft) - height(t->pRight)) > 1)
+		return false;
+	return checkAVL(t->pLeft) && checkAVL(t->pRight);
+}
+
+// ===========Xoay trai===================
+TREE_DG XoayPhai(TREE_DG a)
+{
+	NODE_DG* b = a->pLeft;
+	NODE_DG* d = b->pRight;
+	a->pLeft = d;
+	b->pRight = a;
+	return b;
+}
+// ===========Xoay phai===================
+TREE_DG XoayTrai(TREE_DG a)
+{
+	NODE_DG* b = a->pRight;
+	NODE_DG* d = b->pLeft;
+	a->pRight = d;
+	b->pLeft = a;
+	return b;
+}
+TREE_DG cap_nhap_AVL(TREE_DG& t)
+{
+	if (abs(height(t->pLeft) - height(t->pRight)) > 1)
+	{
+		if (height(t->pLeft) > height(t->pRight))
+		{
+			NODE_DG* x = t->pLeft;
+			if (height(x->pLeft) >= height(x->pRight))    // Trai - trai
+				t = XoayPhai(t);
+			else                                        // Trai _ phai
+			{
+				t->pLeft = XoayTrai(t->pLeft);
+				t = XoayPhai(t);
+			}
+		}
+		else
+		{
+			NODE_DG* x = t->pRight;
+			if (height(x->pRight) >= height(x->pLeft))    // Phai- Phai
+				t = XoayTrai(t);
+			else
+			{
+				t->pRight = XoayPhai(t->pRight);        // Phai -trai
+				t = XoayTrai(t);
+			}
+		}
+	}
+	if (t->pLeft != NULL)
+		t->pLeft = cap_nhap_AVL(t->pLeft);
+	if (t->pRight != NULL)
+		t->pRight = cap_nhap_AVL(t->pRight);
+	return t;
+}
+
+//=======================Tuong tac file================================
+void Push_info(TREE_DG t, ofstream& outfileDG, ofstream& outfileMT)
+{
+	if (t != NULL)
+	{
+		t->docgia.muon = DemMT(t->docgia.node);
+		outfileDG << t->docgia.MATHE << "," << t->docgia.ho << "," << t->docgia.ten
+			<< "," << t->docgia.phai << "," << t->docgia.trangThai << " " << t->docgia.muon << endl;
+		while (t->docgia.node != NULL) {
+			outfileMT << t->docgia.node->muontra.masach << ",";
+			outfileMT << t->docgia.node->muontra.ngaymuon.ngay << " " << t->docgia.node->muontra.ngaymuon.thang << " " << t->docgia.node->muontra.ngaymuon.nam << " ";
+			outfileMT << t->docgia.node->muontra.ngaytra.ngay << " " << t->docgia.node->muontra.ngaytra.thang << " " << t->docgia.node->muontra.ngaytra.nam << " ";
+			outfileMT << t->docgia.node->muontra.trangthai;
+			t->docgia.node = t->docgia.node->next;
+			outfileMT << endl;
+		}
+		Push_info(t->pLeft, outfileDG, outfileMT);
+		Push_info(t->pRight, outfileDG, outfileMT);
+	}
+}
+
+void Write_info(TREE_DG t, int sl)
+{
+	ofstream outfileDG, outfileMT;
+	outfileDG.open("dsdg.txt", ios_base::app);// xoa sach va ghi vao file -> do co chuc nang xoa kho ghi noi tiep -> co the gay lap du lieu
+	outfileMT.open("mt.txt", ios_base::app);
+	outfileDG << sl << endl;
+	Push_info(t, outfileDG, outfileMT);
+	outfileDG.close();
+	outfileMT.close();
+}
+//==========Lay du lieu tu file=========
+
+void Read_info(TREE_DG& t)
+{
+	ifstream fileInDG, fileInMT;
+	fileInDG.open("dsdg.txt", ios_base::in);
+	fileInMT.open("mt.txt", ios_base::in);
+	if (!fileInDG || !fileInMT) {
+		cout << "dsdg.txt/ mt.txt: Open fail!\n";
+		return;
+	}
+	int sl;
+	fileInDG >> sl;
+	string str;
+	MuonTra mt;
+	int n;
+	for (int i = 0; i < sl; i++)
+	{
+		fileInDG.ignore();
+		DocGia dg;
+		getline(fileInDG, dg.MATHE, ',');
+		getline(fileInDG, dg.ho, ',');
+		getline(fileInDG, dg.ten, ',');
+		getline(fileInDG, dg.phai, ',');
+		fileInDG >> dg.trangThai;
+		fileInDG >> dg.muon;
+		for (int i = 0; i < dg.muon; ++i) {
+			//ma sach
+			getline(fileInMT, str, ',');
+			mt.masach = str;
+
+			//ngay muon
+			fileInMT >> n;
+			mt.ngaymuon.ngay = n;
+
+
+			fileInMT >> n;
+			mt.ngaymuon.thang = n;
+
+
+			fileInMT >> n;
+			mt.ngaymuon.nam = n;
+
+			//ngay tra
+			fileInMT >> n;
+			mt.ngaytra.ngay = n;
+
+
+			fileInMT >> n;
+			mt.ngaytra.thang = n;
+
+
+			fileInMT >> n;
+			mt.ngaytra.nam = n;
+
+			//trang thai
+			fileInMT >> n;
+			mt.trangthai = n;
+
+			InsertLast_NodeMuonTra(dg.node, mt);
+		}
+		InsertDGtoTree(t, dg);
+
+	}
+	fileInDG.close();
+	fileInMT.close();
+}
+
+void FreeMemory(TREE_DG t)
+{
+	if (t == NULL) return;
+	FreeMemory(t->pLeft);
+	FreeMemory(t->pRight);
+	delete t;
+}
