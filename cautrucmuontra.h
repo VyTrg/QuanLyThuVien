@@ -69,10 +69,10 @@ void DeleteFirst_NodeMuonTra(Nodemt& head, MuonTra mt);
 void DeleteLast_NodeMuonTra(Nodemt& head, MuonTra mt);
 
 //tao file va ghi du lieu vao file
-void WriteFileMT(Nodemt &node);
+//void WriteFileMT(Nodemt &node);
 
 //doc du lieu tu file
-void ReadFileMT(Nodemt& node);
+//void ReadFileMT(Nodemt& node);
 
 //dinh danh ngay
 std::string DinhDangNgay(Ngay ngay);
@@ -90,10 +90,13 @@ int tinhngay(Ngay ngay);
 void DeleteAll_Mt(Nodemt& head);
 
 //tim cac ma sach
-Nodemt Tim_Mt(Nodemt node, std::string tensach);
+Nodemt Tim_MSMt(Nodemt node, std::string tensach);
 
 //so sanh 2 chuoi
 bool SoSanhChuoi(std::string s, std::string t);//s.size < t.size
+
+//dem danh sach muon tra
+int DemMT(Nodemt node);
 
 ///*-------------------Function------------------*/
 Nodemt CreateNodeMuonTra(MuonTra mt) {
@@ -189,92 +192,92 @@ void DeleteAll_Mt(Nodemt& head) {
 	}
 }
 
-void WriteFileMT(Nodemt& node) {
-	std::ofstream file;
-	file.open("mt.txt", std::ios::out);
-	if (!file)
-		std::cout << "khong tim thay file\n";
-	else {
-		std::cout << "dang luu vao file\n";
-		Nodemt temp = node;
-		while (temp != NULL) {
-			file << temp->muontra.masach << ",";
-			file << temp->muontra.ngaymuon.ngay << "," << temp->muontra.ngaymuon.thang << "," << temp->muontra.ngaymuon.nam << ",";
-			file << temp->muontra.ngaytra.ngay << "," << temp->muontra.ngaytra.thang << "," << temp->muontra.ngaytra.nam << ",";
-			file << temp->muontra.trangthai << std::endl;
-			temp = temp->next;
-		}
-		file.close();
-	}
-}
+//void WriteFileMT(Nodemt& node) {
+//	std::ofstream file;
+//	file.open("mt.txt", std::ios::out);
+//	if (!file)
+//		std::cout << "khong tim thay file\n";
+//	else {
+//		std::cout << "dang luu vao file\n";
+//		Nodemt temp = node;
+//		while (temp != NULL) {
+//			file << temp->muontra.masach << ",";
+//			file << temp->muontra.ngaymuon.ngay << "," << temp->muontra.ngaymuon.thang << "," << temp->muontra.ngaymuon.nam << ",";
+//			file << temp->muontra.ngaytra.ngay << "," << temp->muontra.ngaytra.thang << "," << temp->muontra.ngaytra.nam << ",";
+//			file << temp->muontra.trangthai << std::endl;
+//			temp = temp->next;
+//		}
+//		file.close();
+//	}
+//}
 
-void ReadFileMT(Nodemt& node) {
-	std::ifstream file("mt.txt", std::ios::in);
-	std::string str;
-	int n;
-	DeleteAll_Mt(node);
-	MuonTra mt;
-	if (file.is_open()) {
-		while (file.eof() == false) {
-
-			//ma sach
-			getline(file, str, ',');
-			mt.masach = str;
-			if (str.empty())
-				break;
-
-			//ngay muon
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.ngay = n;
-			
-			
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.thang = n;
-
-			
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaymuon.nam = n;
-
-			//ngay tra
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.ngay = n;
-
-
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.thang = n;
-
-
-			getline(file, str, ',');
-			std::istringstream(str) >> n;
-			mt.ngaytra.nam = n;
-
-			//trang thai
-			getline(file, str);
-			n = StringToInt(str);
-			mt.trangthai = n;
-
-		InsertLast_NodeMuonTra(node, mt);	
-		}
-	}
-	else {
-		std::cout << "Khong the doc duoc file.\n";
-	}
-	file.close();
-}
+//void ReadFileMT(Nodemt& node) {
+//	std::ifstream file("mt.txt", std::ios::in);
+//	std::string str;
+//	int n;
+//	DeleteAll_Mt(node);
+//	MuonTra mt;
+//	if (file.is_open()) {
+//		while (file.eof() == false) {
+//
+//			//ma sach
+//			getline(file, str, ',');
+//			mt.masach = str;
+//			if (str.empty())
+//				break;
+//
+//			//ngay muon
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaymuon.ngay = n;
+//			
+//			
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaymuon.thang = n;
+//
+//			
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaymuon.nam = n;
+//
+//			//ngay tra
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaytra.ngay = n;
+//
+//
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaytra.thang = n;
+//
+//
+//			getline(file, str, ',');
+//			std::istringstream(str) >> n;
+//			mt.ngaytra.nam = n;
+//
+//			//trang thai
+//			getline(file, str);
+//			n = StringToInt(str);
+//			mt.trangthai = n;
+//
+//		InsertLast_NodeMuonTra(node, mt);	
+//		}
+//	}
+//	else {
+//		std::cout << "Khong the doc duoc file.\n";
+//	}
+//	file.close();
+//}
 
 std::string DinhDangNgay(Ngay ngay) {
 	std::string n = "";
-	if (ngay.ngay < 10 && ngay.ngay > 0)
+	if (ngay.ngay < 10 && ngay.ngay >= 0)
 		n = "0" + std::to_string(ngay.ngay) + "/";
 	else
 		n = std::to_string(ngay.ngay) + "/";
 
-	if (ngay.thang < 10 && ngay.thang > 0)
+	if (ngay.thang < 10 && ngay.thang >= 0)
 		n += "0" + std::to_string(ngay.thang) + "/";
 	else
 		n = std::to_string(ngay.thang) + "/";
@@ -317,20 +320,29 @@ int tinhngay(Ngay ngay) {
 	return t;
 }
 
-Nodemt Tim_Mt(Nodemt node, std::string tensach) {
-	std::string temp = ChuanHoaMa(tensach);
-	Nodemt tmp = node;
+Nodemt Tim_MSMt(Nodemt node, std::string masach) {
+	//std::string temp = ChuanHoaMa(tensach);
+	//Nodemt tmp = node;
 	Nodemt tim = NULL;
 	MuonTra MT;
-	while (tmp != NULL) {
-		if (SoSanhChuoi(tmp->muontra.masach, temp)){
-			MT = tmp->muontra;
-			InsertLast_NodeMuonTra(tim, tmp->muontra);
+	while (node != NULL) {
+		if (node->muontra.masach.compare(masach) == 0){
+			MT = node->muontra;
+			InsertLast_NodeMuonTra(tim, node->muontra);
+			break;
 		}
-		tmp = tmp->next;
+		node = node->next;
 	}
 	return tim;
+}
 
+int DemMT(Nodemt node) {
+	int n = 0;
+	while (node != NULL) {
+		node = node->next;
+		++n;
+	}
+	return n;
 }
 
 

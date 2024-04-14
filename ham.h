@@ -27,9 +27,9 @@ std::string ChuanHoaMa(std::string tensach) {
 	}
 	return ma;
 }
-std::string MaSach(std::string tensach) {
-	std::string ms = ChuanHoaMa(tensach);
-	ms = ms + '-' + sotudong();
+std::string MaSach(std::string isbn) {
+	std::string ms = isbn;
+	ms = ms + "_";
 	return ms;
 }
 
@@ -80,10 +80,10 @@ std::string ChuanHoaChuoi(std::string s) {
 	return s;
 }
 
-bool SoSanhChuoi(std::string s, std::string t) {
+bool SoSanhChuoi(std::string s, std::string t) {//s: masach, t:isbn
 	std::string temp = "";
 	for (char& c : s) {
-		if (c != '-')
+		if (c != '_')
 			temp += c;
 		else
 			break;
@@ -92,6 +92,17 @@ bool SoSanhChuoi(std::string s, std::string t) {
 	if (temp.compare(t) == 0)
 		return true;
 	return false;
+}
+
+std::string TachMa(std::string masach) {
+	std::string temp = "";
+	for (char& c : masach) {
+		if (c != '_')
+			temp += c;
+		else
+			break;
+	}
+	return temp;
 }
 
 //std::string LaySo(std::string s) {

@@ -65,9 +65,10 @@ void WriteDSDS(DS_DauSach& DSDS);
 void InsertLastDauSach(DS_DauSach& DSDS, DauSach dausach);
 //them vao cuoi su dung cho doc file
 int InsertDauSach(DS_DauSach& DSDS, DauSach& dausach);
-void ReadDSDS(DS_DauSach& DSDS, Nodedms& node);
+void ReadDSDS(DS_DauSach& DSDS);
 // ham doc file
 int Search(DS_DauSach& DSDS, string x);
+int Search_ISBN(DS_DauSach& DSDS, string isbn);
 // ham tim kiem ten sach 
 void ShowSach(DS_DauSach& DSDS, string ten);
 // in ra thong tin cua sach vua tim kiem 
@@ -103,7 +104,7 @@ string randomString()
 	
 	str[3] = rand() % 10 + 48; 
 	str[4] = rand() % 10 + 48;
-	str[5] = rand() % 10 + 48;
+	//str[5] = rand() % 10 + 48;
 
 	return str;
 }
@@ -161,7 +162,7 @@ void NhapList(DS_DauSach& DSDS, int flag) {
 	dausach.First = DSDS.data[DSDS.n]->First;
 	Sach s;
 	for (int i = 0; i < dausach.soluong; ++i) {
-		s.masach = MaSach(dausach.tensach);
+		s.masach = MaSach(dausach.ISBN);
 		s.trangthai = 0;
 		srand(time(NULL));
 		int ngan = rand() % (20 - 1 + 1) + 1;
@@ -286,6 +287,7 @@ void WriteDSDS(DS_DauSach& DSDS) {
 		fileDS << DSDS.data[i]->tacgia << ",";
 		fileDS << DSDS.data[i]->nxb << ",";
 		fileDS << DSDS.data[i]->theloai << ",";
+		DSDS.data[i]->soluong = DemDMS(DSDS.data[i]->First);
 		fileDS << DSDS.data[i]->soluong << ",";
 		fileDS << DSDS.data[i]->soluotmuon;
 		fileDS << endl;
@@ -312,7 +314,7 @@ void InsertLastDauSach(DS_DauSach& DSDS, DauSach dausach) {
 }
 
 //doc file 
-void ReadDSDS(DS_DauSach& DSDS, Nodedms& node) {
+void ReadDSDS(DS_DauSach& DSDS) {
 
 	while (DSDS.n > 0) {
 		delete DSDS.data[DSDS.n - 1];
@@ -325,8 +327,8 @@ void ReadDSDS(DS_DauSach& DSDS, Nodedms& node) {
 	fileDS.open("DSDS.txt", ios::in);
 	fileDMS.open("dms.txt", ios::in);
 	fileDS >> DSDS.n;
+	fileDS.ignore();
 	for (int i = 0; i < DSDS.n; i++) {
-		//fileDS.ignore();
 		DSDS.data[i] = new DauSach;
 		DauSach ds;
 		getline(fileDS, str, ','); ds.ISBN = str; // xac dinh vi tri n byte ve sau cua doi tuong byte
@@ -341,7 +343,7 @@ void ReadDSDS(DS_DauSach& DSDS, Nodedms& node) {
 			getline(fileDMS, str, ','); s.masach = str;
 			getline(fileDMS, str, ','); n = StringToInt(str); s.trangthai = n;
 			getline(fileDMS, str); s.vitri = str;
-			InsertLast_NodeDMSach(node, s);
+			//InsertLast_NodeDMSach(node, s);
 			InsertLast_NodeDMSach(ds.First, s);
 		}
 		getline(fileDS, str); n = StringToInt(str); ds.soluotmuon = n;
@@ -553,7 +555,11 @@ void SuaThongTinSach(DS_DauSach& DSDS) {
 
 
 
-
+int Search_ISBN(DS_DauSach& DSDS, string isbn) {
+	for (int i = 0; i < DSDS.n; i++)
+		if (DSDS.data[i]->ISBN == isbn) return i;
+	return -1;
+}
 
 
 

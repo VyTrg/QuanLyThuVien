@@ -12,21 +12,28 @@ E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(282,5): warning C427
 E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(40,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(96,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(97,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(166,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(167,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(227,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(68,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-graphics.lib(dibutil.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(dibutil.obj)' or at ''; linking object as if no debug info
-graphics.lib(drawing.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(drawing.obj)' or at ''; linking object as if no debug info
-graphics.lib(file.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(file.obj)' or at ''; linking object as if no debug info
-graphics.lib(misc.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(misc.obj)' or at ''; linking object as if no debug info
-graphics.lib(mouse.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(mouse.obj)' or at ''; linking object as if no debug info
-graphics.lib(text.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(text.obj)' or at ''; linking object as if no debug info
-graphics.lib(winbgi.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winbgi.obj)' or at ''; linking object as if no debug info
-graphics.lib(winthread.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winthread.obj)' or at ''; linking object as if no debug info
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(73,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(82,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(94,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(96,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(254,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
   ThuVien.vcxproj -> E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\Debug\ThuVien.exe

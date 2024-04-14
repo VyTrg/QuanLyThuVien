@@ -215,7 +215,51 @@ void InputNumber(int left, int top, int right, int bottom, std::string& s) {
 			{
 				Delete(left, top, right, bottom, s);
 			}
-			else if (c == 13) // enter
+			else if (c == 13 && s != "|") // enter
+			{
+				s.pop_back();
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("NHAP THANH CONG", WHITE);
+				break;
+			}
+			else if (c == 27) {
+				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);
+				s = "";
+				outtextxy(left + 10, top + 10, (char*)s.c_str());
+				dialog("HUY NHAP", RED);
+				break;
+			}
+		}
+		else displayCur(s, left, top, right, bottom);
+	}
+}
+
+void InputMa(int left, int top, int right, int bottom, std::string& s) {
+	setfillstyle(SOLID_FILL, CYAN);
+	setcolor(CYAN);
+	bar(left + 1, top + 1, right - 1, bottom - 1);
+	s += '|';
+	outtextxy(left + 10, top + 10, (char*)s.c_str());
+	char c;
+	while (kbhit()) char a = getch();
+	while (1)
+	{
+		setcolor(15);
+		delay(50);
+		outtextxy(left + 10, top + 10, (char*)s.c_str());
+		if (kbhit())
+		{
+			c = getch();
+			if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || c == '_')
+			{
+				Input(left, top, right, bottom, s, c);
+			}
+			else if (c == 8) // backspace
+			{
+				Delete(left, top, right, bottom, s);
+			}
+			else if (c == 13 && s != "|") // enter
 			{
 				s.pop_back();
 				tao_button(left + 10, top + 10, right, bottom, "", BLACK, CYAN);

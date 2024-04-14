@@ -1,4 +1,4 @@
-//#pragma once
+
 
 #include <iostream>
 #include <string.h>
@@ -28,487 +28,98 @@
 #include "muontra.h"
 #include "dms.h"
 
-/*-------------------Prototype------------------*/
-//xu ly danh muc sach
-void danhmucsach();
-
-//nhap danh mach sach
-void NhapDms(Nodedms& node);
-
-//xuat danh muc sach
-void XuatDms(Nodedms& node);
-
-//xu ly muon tra
-void muontra();
-
-//nhap muon tra
-void NhapMt(Nodemt& node, MuonTra& mt);
-
-//xuat muon tra
-void XuatMt();
-
-//tim cac ma sach
-void TimCacMaSach(Nodemt node);
-
-//tinh ngay
-//void date();
-
-//void menu(TREE_DG& t) {
-//	while (true) {
-//		system("cls");
-//		cout << "--------------NEMU--------------\n";
-//		cout << "1. Nhap du lieu DG\n";
-//		cout << "2. Xuat du lieu DG theo Ma The\n";
-//		cout << "3. Hieu chinh thong tin DG\n";
-//		cout << "4. Xoa DG\n";
-//		cout << "5. Xuat du lieu DG theo ten\n";
-//		cout << "6. Lay du lieu tu file\n";
-//		cout << "7. Cap nhap cay AVL\n";
-//		//		cout << "8. 	";
-//		//		cout << "9. 	";
-//		cout << "10. Luu du lieu\n";
-//		cout << "0. EXIT\n";
-//		cout << "--------------------------------\n";
-//		int option;
-//
-//		cout << "Nhap lua chon: ";
-//		cin >> option;
-//		if (option < 0 || option > 10) {
-//			cout << "Lua chon khong hop le!";
-//			Sleep(600);
-//		}
-//		else if (option == 1) { //Nhap doc gia
-//
-//			int tmp;
-//			string str;
-//
-//			DocGia dg;
-//
-//
-//			dg.MATHE = RandomMT(t);
-//
-//
-//			cin.ignore(265, '\n');
-//			cout << "Nhap ho: ";
-//			getline(cin, str);
-//			dg.ho = str;
-//
-//			cout << "Nhap ten: ";
-//			getline(cin, str);
-//			dg.ten = str;
-//
-//			cout << "Nhap phai: ";
-//			getline(cin, str);
-//			dg.phai = str;
-//
-//			dg.trangThai = 1;
-//
-//			InsertDGtoTree(t, dg);
-//
-//			cout << endl;
-//			system("pause");
-//		}
-//		else if (option == 2) { //Xuat doc gia
-//
-//			if (t == NULL) {
-//				cout << "Khong co thong tin doc gia!";
-//			}
-//			else {
-//				system("cls");
-//				cout << "In danh sach doc gia theo ma the\n";
-//				Duyet_LNR(t);
-//			}
-//
-//			cout << endl;
-//			system("pause");
-//		}
-//		else if (option == 3) { //Hieu chinh doc gia
-//			string str;
-//			cout << "Nhap ma tha can hieu chinh: ";
-//			cin.ignore(265, '\n');
-//			getline(cin, str);
-//			TREE_DG temp = Find_DG(t, str);
-//			if (temp == NULL) {
-//				cout << "Khong tim thay doc gia!";
-//				Sleep(600);
-//			}
-//			else {
-//
-//				cout << "Nhap ho: ";
-//				getline(cin, str);
-//				temp->docgia.ho = str;
-//
-//				cout << "Nhap ten: ";
-//				getline(cin, str);
-//				temp->docgia.ten = str;
-//
-//				cout << "Nhap phai: ";
-//				getline(cin, str);
-//				temp->docgia.phai = str;
-//
-//				cout << "Da cap nhap doc gia!";
-//				Sleep(600);
-//			}
-//		}
-//		else if (option == 4) { //Xoa doc gia
-//			string str;
-//			cout << "Nhap MA THE can xoa: ";
-//			cin.ignore(265, '\n');
-//			getline(cin, str);
-//			if (IsDeleted_DG(t, str) == 1) {
-//				cout << "Da xoa doc gia";
-//				Sleep(600);
-//			}
-//			else {
-//				cout << "Khong tim thay doc gia!";
-//				Sleep(600);
-//			}
-//		}
-//		else if (option == 5) {
-//			int sl = 0;
-//			string arr[10];
-//
-//
-//			DuyetTen(t, arr, sl);
-//
-//			BubbleSort(arr, sl);
-//
-//			system("cls");
-//			cout << "In danh sach doc gia theo ten\n";
-//
-//			for (int i = 0; i < sl; i++) {
-//				Find_TenDG(t, arr[i]);
-//			}
-//
-//			system("pause");
-//		}
-//		else if (option == 6) {
-//			Read_info(t);
-//			cout << "Da lay du lieu tu file!";
-//			Sleep(600);
-//		}
-//		else if (option == 7) {
-//			cap_nhap_AVL(t);
-//		}
-//		//		else if (option == 8) {
-//		//			
-//		//		}
-//		//		else if (option == 9) {
-//		//			
-//		//		}
-//		else if (option == 10) {
-//			//			int k = countDG(t);
-//			Write_info(t, nDG);
-//
-//		}
-//		else if (option == 0) {
-//			FreeMemory(t);
-//			break;
-//		}
-//	}
-//}
+void Nhap(TREE_DG& DG, DS_DauSach &DSDS) {
+	DocGia dg;
+	dg.MATHE = RandomMT(DG);
+	/*std::cin.ignore();*/
+	std::cout << "Ho:"; getline(std::cin, dg.ho);
+	std::cout << "Ten:"; std::cin >> dg.ten;
+	std::cout << "Phai:"; std::cin >> dg.phai;
+	std::cout << "Trang thai the:"; std::cin >> dg.trangThai;
+	if (dg.trangThai == 0) {
+		dg.muon = DemMT(dg.node);
+	}
+	int check;
+	std::string tensach;
+	std::string masach;
+	MuonTra mt;
+	if (dg.trangThai == 1) {
+		std::cout << "So sach muon (<= 3 cuon/doc gia): "; std::cin >> dg.muon;
+		for (int i = 0; i < dg.muon; ++i) {
+			std::cin.ignore();
+			do {
+				std::cout << "Nhap ten sach muon muon: "; getline(std::cin, tensach);
+				check = Search(DSDS, tensach);
+			} while (check == -1);
+			std::cout << "Cac ma sach co the muon\n";
+			Nodedms hienthi = DSDS.data[check]->First;
+			while (hienthi != NULL) {
+				if (hienthi->sach.trangthai == 0) {
+					std::cout << hienthi->sach.masach << std::endl;
+				}
+				hienthi = hienthi->next;
+			}
+			Nodedms muon_muon = NULL;
+			do {
+				std::cout << "Nhap ma sach muon muon: "; std::cin >> masach;
+				muon_muon = Tim_MSDMS(DSDS.data[check]->First, masach);
+			} while (muon_muon == NULL);
+			DSDS.data[check]->First->sach.trangthai = 1;
+			mt.masach = muon_muon->sach.masach;
+			mt.trangthai = 0;
+			std::cout << "Da muon: " << mt.masach << std::endl;
+			std::cout << "Nhap ngay muon: "; std::cin >> mt.ngaymuon.ngay;
+			std::cout << "Nhap thang muon: "; std::cin >> mt.ngaymuon.thang;
+			std::cout << "Nhap nam muon: "; std::cin >> mt.ngaymuon.nam;
+			std::cin.ignore();
+			mt.ngaytra.ngay = 0;
+			mt.ngaytra.thang = 0;
+			mt.ngaytra.nam = 0;
+			InsertLast_NodeMuonTra(dg.node, mt);
+		}
+	}
+	std::cout << "Da muon thanh cong\n";
+	std::cout << DSDS.data[check]->First->sach.masach << std::endl;
+	std::cout << DSDS.data[check]->First->sach.trangthai << std::endl;
+	std::cout << DSDS.data[check]->First->sach.vitri << std::endl;
+	InsertDGtoTree(DG, dg);
+}
 
 int main()
 {
-	/*TREE_DG DG;
-	KhoiTao(DG);
-	Read_info(DG);*/
-	initwindow(w, h);
-	
-	//	danhmucsach();	
-	//scr_muontra();
-	//	Run_ThongTin();
-	Nodedms node = NULL;
-	DS_DauSach list;
-	list.n = 0;
-	DauSach ds;
-	ReadDSDS(list, node);
-	displayDms(list, node);
-
-	/*Nodemt node = NULL;
-	TREE_DG DG = NULL;
-	Read_info(DG);
-	ReadFileMT(node);
-	displayMuonTra(node, DG);*/
-
 	/*DS_DauSach list;
 	list.n = 0;
 	DauSach ds;
-	ReadDSDS(list);
-	LietKe(list);*/
+	ReadDSDS(list);*/
 
-	/*int n = 0, luachon;
+	/*TREE_DG DG;
+	KhoiTao(DG);
+	for (int i = 0; i < 5; ++i) {
+		Nhap(DG, list);
+	}
+	int sl = 5;
+	Write_info(DG, 5);*/
+	/*TREE_DG temp;
+	KhoiTao(temp);
+	Read_info(temp);
+	DuyetLNR(temp);*/
+
+	//DuyetLNR(DG);
+	/*int sl = 1;
+	Write_info(DG, 1);
+	TREE_DG temp;
+	KhoiTao(temp);
+	Read_info(temp);
+	DuyetLNR(temp);
+	*/
+	initwindow(w, h);
 	DS_DauSach list;
-	Nodedms node = NULL;
-	DauSach dausach;
 	list.n = 0;
-	string ten;
-	do
-	{
-		InMenu();
-		cin >> luachon;
-		switch (luachon) {
-		case 0:
-			break;
-		case 1:
-		{
-			NhapList(list, 1);
-			break;
-		}
-
-		case 2:
-		{
-			sort_Theotheloai(list);
-			LietKe(list);
-			break;
-		}
-
-
-		case 3: {
-			WriteDSDS(list);
-			break;
-		}
-
-		case 4: {
-			ReadDSDS(list);
-			LietKe(list);
-			break;
-		}
-		case 5: {
-			cout << "Nhap thong tin cho dau sach moi:" << endl;
-
-			if (NhapSach(list, dausach) == 1)
-				InsertDauSach(list, dausach);
-			sort_Theotheloai(list);
-			LietKe(list);
-			break;
-		}
-
-		case 6: {
-			cout << "Tim kiem sach."; cin.ignore();
-			getline(cin, ten);
-			cout << "Thog tin tra cuu duoc: \n";
-			ShowSach(list, ten);
-			break;
-		}
-		case 7: {
-			SuaThongTinSach(list);
-			break;
-		}
-
-		case 8: {
-			LietKe(list);
-			cout << "Nhap ISBN cua sach muon xoa: ";
-			string ISBN;
-			cin.ignore();
-			getline(cin, ISBN);
-			DeleteSach_ISBN(list, ISBN);
-			LietKe(list);
-			break;
-		}
-
-		case 9: {
-			
-			cout << "Thoat chuong trinh.\n";
-			return 0;
-		}
-		default: {
-			cout << "Lua chon khong hop le. Vui long chon lai.\n";
-			break;
-		}
-		}
-
-	} while (true);
-	system("PAUSE");
-	return 0;*/
-
+	DauSach ds;
+	ReadDSDS(list);
+	displayDms(list);
 
 	return 0;
 }
 
-/*-------------------Function------------------*/
-void NhapDms(Nodedms& node) {
-	Sach sach;
-	std::string str;
-	int n;
 
-	std::cin.ignore();
-	std::cout << "Nhap dau sach ";
-	std::getline(std::cin, str);
-	//str = MaSach(str);
-	sach.masach = str;
-
-	std::cout << "Nhap trang thai ";
-	std::cin >> n;
-	sach.trangthai = n;
-
-	std::cin.ignore();
-	std::cout << "Nhap vi tri ";
-	std::getline(std::cin, str);
-
-	sach.vitri = str;
-
-	//	if(node == NULL)
-	//		InsertFirst_NodeDMSach(node, sach);
-	//	else
-	InsertLast_NodeDMSach(node, sach);
-	//	std::cout << node->sach.masach << " " << node->sach.trangthai;
-
-}
-
-void XuatDms(Nodedms& node) {
-	ReadFileDMS(node);
-	std::cout << "Da ghi du lieu tu file\n";
-	int cnt = 0;
-	Nodedms temp = node;
-	while (temp != NULL) {
-		std::cout << "=======" << cnt + 1 << "======\n";
-		std::cout << "Ma sach:" << temp->sach.masach << std::endl;
-		std::cout << "Trang thai:" << temp->sach.trangthai << std::endl;
-		std::cout << "Vi tri:" << temp->sach.vitri << std::endl;
-		temp = temp->next;
-		++cnt;
-	}
-}
-
-void danhmucsach() {
-	Nodedms node = NULL;
-	Sach s;
-	int chon;
-	int sl = 0;
-	while (1) {
-		//		system("cls");
-		std::cout << "============Menu=============\n";
-		std::cout << "1. Nhap dms\n";
-		std::cout << "2. Xuat dms tu trong file\n";
-		std::cout << "3. Luu dms vao file\n";
-		
-		std::cout << "0. Thoat\n";
-		std::cout << "Lua chon: "; std::cin >> chon;
-		if (chon == 1) {
-			NhapDms(node);
-		}
-		else if (chon == 2) {
-			XuatDms(node);
-			//			system("pause");
-		}
-		else if (chon == 3) {
-			WriteFileDMS(node);
-			//			Sleep(600);
-		}
-		
-		else if (chon == 0)
-			break;
-
-	}
-}
-
-void muontra() {
-	Nodemt node = NULL;
-	MuonTra mt;
-	int chon;
-
-	while (1) {
-		//		system("cls");
-		std::cout << "============Menu=============\n";
-		std::cout << "1. Nhap mt\n";
-		std::cout << "2. Xuat mt tu trong file\n";
-		std::cout << "3. Luu mt vao file\n";
-		std::cout << "4. Tim cac ma sach\n";
-		std::cout << "0. Thoat\n";
-		std::cout << "Lua chon: "; std::cin >> chon;
-		//		std::cin.ignore();
-		if (chon == 1) {
-			NhapMt(node, mt);
-		}
-		else if (chon == 2) {
-			XuatMt();
-			//			Sleep(300);
-		}
-		else if (chon == 3) {
-			WriteFileMT(node);
-			//			Sleep(600);
-		}
-		else if (chon == 4) {
-			TimCacMaSach(node);
-		}
-		else if (chon == 0)
-			break;
-
-	}
-}
-
-void NhapMt(Nodemt& node, MuonTra& mt) {
-
-	std::string str;
-	int n;
-
-	std::cin.ignore();
-	std::cout << "Nhap dau sach ";
-	std::getline(std::cin, str);
-	//str = MaSach(str);
-	mt.masach = str;
-
-	std::cout << "Nhap ngay muon ";
-	std::cin >> n;
-	mt.ngaymuon.ngay = n;
-	std::cin >> n;
-	mt.ngaymuon.thang = n;
-	std::cin >> n;
-	mt.ngaymuon.nam = n;
-
-	std::cout << "Nhap ngay tra ";
-	std::cin >> n;
-	mt.ngaytra.ngay = n;
-	std::cin >> n;
-	mt.ngaytra.thang = n;
-	std::cin >> n;
-	mt.ngaytra.nam = n;
-
-	std::cout << "Trang thai ";
-	std::cin >> n;
-	mt.trangthai = n;
-
-	InsertLast_NodeMuonTra(node, mt);
-}
-
-void XuatMt() {
-	Nodemt node = NULL;
-	ReadFileMT(node);
-	int cnt = 0;
-	Nodemt temp = node;
-	while (temp != NULL) {
-		std::cout << "=======" << cnt + 1 << "======\n";
-		std::cout << "Ma sach:" << temp->muontra.masach << std::endl;
-		std::cout << "Ngay muon:" << temp->muontra.ngaymuon.ngay << "/" << temp->muontra.ngaymuon.thang << "/" << temp->muontra.ngaymuon.nam << std::endl;
-		std::cout << "Ngay tra:" << temp->muontra.ngaytra.ngay << "/" << temp->muontra.ngaytra.thang << "/" << temp->muontra.ngaytra.nam << std::endl;
-		std::cout << "Trang thai:" << temp->muontra.trangthai << std::endl;
-		temp = temp->next;
-		++cnt;
-	}
-}
-
-void TimCacMaSach(Nodemt node) {
-	ReadFileMT(node);
-	//Nodemt temp = node;
-	//int cnt = 0;
-	std::string tensach;
-	std::cin.ignore();  
-	std::cout << "Nhap ten sach can tim: ";   getline(std::cin, tensach);
-	Nodemt tmp = Tim_Mt(node, tensach);
-	int cnt = 0;
-	if (tmp != NULL)
-		while (tmp != NULL) {
-			std::cout << "=======" << cnt + 1 << "======\n";
-			std::cout << "Ma sach:" << tmp->muontra.masach << std::endl;
-			std::cout << "Ngay muon:" << tmp->muontra.ngaymuon.ngay << "/" << tmp->muontra.ngaymuon.thang << "/" << tmp->muontra.ngaymuon.nam << std::endl;
-			std::cout << "Ngay tra:" << tmp->muontra.ngaytra.ngay << "/" << tmp->muontra.ngaytra.thang << "/" << tmp->muontra.ngaytra.nam << std::endl;
-			std::cout << "Trang thai:" << tmp->muontra.trangthai << std::endl;
-			tmp = tmp->next;
-			++cnt;
-		}
-	else {
-		
-		std::cout << "Khong tim thay/ sach khong ton tai\n";
-	}
-}
