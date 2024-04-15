@@ -36,4 +36,5 @@ E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(96,20): warn
 E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(254,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdanhmucsach.h(274,1): warning C4715: 'position': not all control paths return a value
   ThuVien.vcxproj -> E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\Debug\ThuVien.exe

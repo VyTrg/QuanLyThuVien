@@ -246,28 +246,37 @@ void DeleteAfter_NodeDMSach(Nodedms& node) {//xoa sau node p
 	delete xoa;
 }
 
-int Xoa_MSDMS(Nodedms& node, std::string masach) {//0: xoa duoc, 1: khong xoa duoc
+void Xoa_MSDMS(Nodedms& node, std::string masach) {//0: xoa duoc, 1: khong xoa duoc
 	if (node->sach.masach == masach) {
-		if (node->sach.trangthai == 0) {
-			DeleteFirst_NodeDMSach(node);
-			return 0;
-		}
-		else
-			return 1;
+		DeleteFirst_NodeDMSach(node);
 	}
 	else {
 		Nodedms tmp = node;
 		while (tmp->next->sach.masach != masach)
 			tmp = tmp->next;
-		if (tmp->next->sach.trangthai == 0) {
-			DeleteAfter_NodeDMSach(tmp);
-			return 0;
-		}
-		else
-			return 1;
+		DeleteAfter_NodeDMSach(tmp);
 	}
-	return 1;
+		//else
+			//return 1;
+	
+	//return 1;
 }
+
+Nodedms position(Nodedms node, int p) {
+	int cnt = 0;
+	while (node != NULL) {
+		if (cnt == p) {
+			return node;
+		}
+		++cnt;
+		node = node->next;
+	}
+}
+
+void HieuChinhDMS(Nodedms& node, std::string masach, Sach s) {
+	
+}
+
 //Nodedms TrungMaSach(Nodedms dms, std::string masach) {
 //	if (dms == NULL || dms->sach.masach.compare(masach) == 0)
 //		return dms;
