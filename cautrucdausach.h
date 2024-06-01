@@ -149,31 +149,46 @@ int NhapSach(DS_DauSach& DSDS, DauSach& dausach) {
 	return 1;
 }
 // nhap danh sach
-void NhapList(DS_DauSach& DSDS, int flag) {
-	DauSach dausach;
-	if (flag == 0)// nhap moi tu dau
-		while (DSDS.n > 0) {
-			delete DSDS.data[DSDS.n - 1];
-			DSDS.n--;
-		}
-	if (NhapSach(DSDS, dausach) == 0) return;
-	DSDS.data[DSDS.n] = new DauSach();
-	*DSDS.data[DSDS.n] = dausach;
-	dausach.First = DSDS.data[DSDS.n]->First;
-	Sach s;
-	for (int i = 0; i < dausach.soluong; ++i) {
-		s.masach = MaSach(dausach.ISBN);
-		s.trangthai = 0;
-		srand(time(NULL));
-		int ngan = rand() % (20 - 1 + 1) + 1;
-		int ke = rand() % (20 - 1 + 1) + 1;
-		std::string vitri = "NGAN " + std::to_string(ngan) + " KE " + std::to_string(ke);
-		s.vitri = vitri;
-		
-		InsertLast_NodeDMSach(DSDS.data[DSDS.n]->First, s);
-	}
-	DSDS.n++;
-	if (DSDS.n == Max_DS_DauSach) cout << "Danh Sach Day";
+//void NhapList(DS_DauSach& DSDS, int flag) {
+//	DauSach dausach;
+//	if (flag == 0)// nhap moi tu dau
+//		while (DSDS.n > 0) {
+//			delete DSDS.data[DSDS.n - 1];
+//			DSDS.n--;
+//		}
+//	if (NhapSach(DSDS, dausach) == 0) return;
+//	DSDS.data[DSDS.n] = new DauSach();
+//	*DSDS.data[DSDS.n] = dausach;
+//	dausach.First = DSDS.data[DSDS.n]->First;
+//	Sach s;
+//	for (int i = 0; i < dausach.soluong; ++i) {
+//		s.masach = MaSach(dausach.ISBN);
+//		s.trangthai = 0;
+//		srand(time(NULL));
+//		int ngan = rand() % (20 - 1 + 1) + 1;
+//		int ke = rand() % (20 - 1 + 1) + 1;
+//		std::string vitri = "NGAN " + std::to_string(ngan) + " KE " + std::to_string(ke);
+//		s.vitri = vitri;
+//		
+//		InsertLast_NodeDMSach(DSDS.data[DSDS.n]->First, s);
+//	}
+//	DSDS.n++;
+//	if (DSDS.n == Max_DS_DauSach) cout << "Danh Sach Day";
+//}
+
+std::string MaSach(DS_DauSach& DSDS, int check, int &n) {
+	std::string masach;
+	do {
+		++n;
+		masach = DSDS.data[check]->ISBN;
+		if (n < 10)
+			masach = masach + "_00" + std::to_string(n);
+		else if (n >= 10 && n <= 99)
+			masach = masach + "_0" + std::to_string(n);
+		else if (n >= 100)
+			masach = masach + "_" + std::to_string(n);
+	} while (CheckTrung(DSDS.data[check]->First, masach) == false);
+	return masach;
 }
 
 void LietKe(DS_DauSach& DSDS) {
@@ -364,6 +379,7 @@ int Search(DS_DauSach& DSDS, string x)
 	return -1;
 }
 
+
 void ShowSach(DS_DauSach& DSDS, string ten) {
 	int i = Search(DSDS, ten);
 	if (i == -1) cout << "Khong co sach trong danh sach.";
@@ -463,7 +479,7 @@ void sort_Theotheloai(DS_DauSach& DSDS) {
 	LietKe(DSDS);
 }
 
-// them sach nhièu hơn 1 sach
+// them sach nhieu hơn 1 sach
 int InsertDauSach(DS_DauSach& DSDS, DauSach& dausach) {
 	int i, k;
 	if (DSDS.n == Max_DS_DauSach) return 0;
@@ -561,6 +577,29 @@ int Search_ISBN(DS_DauSach& DSDS, string isbn) {
 	return -1;
 }
 
+void Tra_sach(DS_DauSach &DSDS, std::string masach) {
+	int pos = Search_ISBN(DSDS, TachMa(masach));
+	Nodedms node = DSDS.data[pos]->First;
+	while (node != NULL) {
+		if (node->sach.masach.compare(masach) == 0) {
+			node->sach.trangthai = 0;
+			break;
+		}
+		node = node->next;
+	}
+}
+
+void Muon_sach(DS_DauSach& DSDS, std::string masach) {
+	int pos = Search_ISBN(DSDS, TachMa(masach));
+	Nodedms node = DSDS.data[pos]->First;
+	while (node != NULL) {
+		if (node->sach.masach.compare(masach) == 0) {
+			node->sach.trangthai = 1;
+			break;
+		}
+		node = node->next;
+	}
+}
 
 
 

@@ -25,6 +25,7 @@ struct MuonTra {
 	Ngay ngaytra;
 	int trangthai;
 };
+//dg->node->muontra.masach
 
 struct NodeMuonTra {
 	MuonTra muontra;
@@ -287,6 +288,13 @@ std::string DinhDangNgay(Ngay ngay) {
 }
 
 int TinhNgay(Ngay muon, Ngay now) {
+	if (now.ngay == 0 && now.thang == 0 && now.nam == 0) {
+		time_t n = time(0);
+		tm* ltm = localtime(&n);
+		now.nam = 1900 + ltm->tm_year;
+		now.thang = 1 + ltm->tm_mon;
+		now.ngay = ltm->tm_mday;
+	}
 	int t = tinhngay(now);
 	int m = tinhngay(muon);
 	return (t - m);
@@ -345,5 +353,82 @@ int DemMT(Nodemt node) {
 	return n;
 }
 
+
+Nodemt position_mt(Nodemt node, int p) {
+	int cnt = 0;
+	while (node != NULL) {
+		if (cnt == p) {
+			return node;
+		}
+		++cnt;
+		node = node->next;
+	}
+}
+
+void DeleteFirst_NodeMT(Nodemt& node) {
+	if (node->next == NULL) {
+		node = NULL;
+		return;
+	}
+	if (node == NULL)
+		return;
+
+	Nodemt xoa = node;
+	node = node->next;
+	node->previous = NULL;
+	delete xoa;
+}
+
+void DeleteAfter_NodeMT(Nodemt& node) {//xoa sau node p
+	if (node == NULL || node->next == NULL)
+		return;
+	Nodemt xoa = node->next;
+	if (xoa->next != NULL) {
+		node->next = xoa->next;
+		xoa->next->previous = node;
+	}
+	else {
+		node->next = NULL;
+	}
+	delete xoa;
+}
+
+void Xoa_MSMT(Nodemt& node, std::string masach) {//0: xoa duoc, 1: khong xoa duoc
+	if (node == NULL)
+		return;
+	if (node->muontra.masach == masach) {
+		DeleteFirst_NodeMT(node);
+	}
+	else {
+		Nodemt tmp = node;
+		while (tmp->next->muontra.masach != masach)
+			tmp = tmp->next;
+		DeleteAfter_NodeMT(tmp);
+
+	}
+	//else
+		//return 1;
+
+//return 1;
+}
+bool KiemTraTrung(Nodemt node, std::string masach) {
+	while (node != NULL) {
+		if (TachMa(node->muontra.masach) == TachMa(masach))
+			return false;
+		else
+			node = node->next;
+	}
+	return true;
+}
+
+bool KiemTraQuaHan(Nodemt node) {
+	while (node != NULL) {
+		if (TinhNgay(node->muontra.ngaymuon, node->muontra.ngaytra) > 7)
+			return false;
+		else
+			node = node->next;
+	}
+	return true;
+}
 
 //#endif 

@@ -203,7 +203,6 @@ void InputNumber(int left, int top, int right, int bottom, std::string& s) {
 	while (1)
 	{
 		setcolor(15);
-		outtextxy(left + 10, top + 10, (char*)s.c_str());
 		if (kbhit())
 		{
 			c = getch();
@@ -285,5 +284,5 @@ void dialog(std::string massage, int color) {
 	//bar(750, 30, 850, 30);
 	delay(900);
 	setfillstyle(SOLID_FILL, 3);
-	bar(750, 20, 1200, 55);
+	bar(750, 20, w, 55);
 }

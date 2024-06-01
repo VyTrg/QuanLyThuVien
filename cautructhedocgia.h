@@ -141,14 +141,14 @@ void XuatDG(DocGia dg)
 	}
 }
 
-void DuyetLNR(TREE_DG t)
+void DuyetLNR(TREE_DG t, NODE_DG** nodes, int &sl)
 {
 	if (t != NULL)
 	{
-		DuyetLNR(t->pLeft);
-		//arr[sl++] = t;
-		XuatDG(t->docgia);
-		DuyetLNR(t->pRight);
+		DuyetLNR(t->pLeft, nodes, sl);
+		nodes[sl++] = t;
+		//XuatDG(t->docgia);
+		DuyetLNR(t->pRight, nodes, sl);
 	}
 }
 
@@ -533,6 +533,7 @@ void Read_info(TREE_DG& t)
 			mt.trangthai = n;
 
 			InsertLast_NodeMuonTra(dg.node, mt);
+			fileInMT.ignore();
 		}
 		InsertDGtoTree(t, dg);
 

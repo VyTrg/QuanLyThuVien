@@ -15,9 +15,9 @@
 #include <sstream>
 
 
+#include "define.h"
 #include "graphic.h"
 #include "ham.h"
-#include "define.h"
 #include "cautrucdanhmucsach.h"
 #include "cautrucdausach.h"
 #include "cautrucmuontra.h"
@@ -87,6 +87,10 @@
 
 int main()
 {
+	/*TREE_DG temp;
+	KhoiTao(temp);
+	Read_info(temp);
+	displayMuonTra();*/
 	/*DS_DauSach list;
 	list.n = 0;
 	DauSach ds;
@@ -117,8 +121,11 @@ int main()
 	list.n = 0;
 	DauSach ds;
 	ReadDSDS(list);
-	displayDms(list);
-
+	TREE_DG tree;
+	KhoiTao(tree);
+	Read_info(tree);
+	//displayDms(list);
+	displayMuonTra(list, tree);
 	return 0;
 }
 

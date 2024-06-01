@@ -104,7 +104,6 @@ void InsertAfter_NodeDMSach(Nodedms& node, Sach& sach) {
 
 	newnode->next = node->next;
 	node->next = newnode;
-
 }
 
 void InsertLast_NodeDMSach(Nodedms& node, Sach& sach) {
@@ -210,6 +209,16 @@ int DemDMS(Nodedms node) {
 	return n;
 }
 
+int DemMuon(Nodedms node) {
+	int n = 0;
+	while (node != NULL) {
+		if(node->sach.trangthai == 0)
+			++n;
+		node = node->next;
+	}
+	return n;
+}
+
 Nodedms Tim_MSDMS(Nodedms node, std::string masach) {
 	//std::string temp = ChuanHoaMa(tensach);
 	//Nodemt tmp = node;
@@ -229,10 +238,7 @@ Nodedms Tim_MSDMS(Nodedms node, std::string masach) {
 void DeleteFirst_NodeDMSach(Nodedms& node) {
 	if (node == NULL)
 		return;
-	/*if (node->next == NULL) {
-		delete node;
-		return;
-	}*/
+	
 	Nodedms xoa = node;
 	node = node->next;
 	delete xoa;
@@ -273,9 +279,27 @@ Nodedms position(Nodedms node, int p) {
 	}
 }
 
-void HieuChinhDMS(Nodedms& node, std::string masach, Sach s) {
-	
+void HieuChinhDMS(Nodedms& node, Nodedms sua) {
+	Nodedms tmp = node;
+	while (tmp->sach.masach.compare(sua->sach.masach) != 0)
+		tmp = tmp->next;
+	tmp->sach.trangthai = sua->sach.trangthai;
+	tmp->sach.vitri = sua->sach.vitri;
 }
+
+bool CheckTrung(Nodedms node, std::string masach) {
+	while (node != NULL) {
+		if (node->sach.masach != masach) {
+			node = node->next;
+		}
+		else
+			return false;
+	}
+	return true;
+}
+
+
+
 
 //Nodedms TrungMaSach(Nodedms dms, std::string masach) {
 //	if (dms == NULL || dms->sach.masach.compare(masach) == 0)
