@@ -437,6 +437,14 @@ void displayMuonTra(DS_DauSach &DSDS, TREE_DG& DG) {
 			bool btnMenuclick = (pos_x >= btnMenu.left && pos_x <= btnMenu.right && pos_y >= btnMenu.top && pos_y <= btnMenu.bottom);
 			bool btnMuonclick = (pos_x >= btnMuonTra.left && pos_x <= btnMuonTra.right && pos_y >= btnMuonTra.top && pos_y <= btnMuonTra.bottom);
 			bool btnTraCuuclick = (pos_x >= btnTraCuu.left && pos_x <= btnTraCuu.right && pos_y >= btnTraCuu.top && pos_y <= btnTraCuu.bottom);
+			if (btnMenuclick) {
+				setfillstyle(3, 3);
+				setcolor(15);// mau khung
+				setbkcolor(3);
+				cleardevice();
+				menu();
+				return;
+			}
 			if (btnMuonclick) {
 				xoa_scr();
 				btnMuonTra.bgcolor = BLACK;
@@ -497,9 +505,7 @@ void displayMuonTra(DS_DauSach &DSDS, TREE_DG& DG) {
 				in_dausach(DSDS, j_sach, pos_trangsach, so_trangsach, DSDS.n);
 				
 			}
-			if (btnMenuclick) {
-
-			}
+			
 			setcolor(WHITE);
 			setbkcolor(CYAN);
 			bool NhapMaThe = pos_x >= 160 && pos_x <= 550 && pos_y >= 100 && pos_y <= 140;

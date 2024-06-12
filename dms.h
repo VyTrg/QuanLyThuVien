@@ -302,6 +302,7 @@ void tableDms() {
 
 void displayDms(DS_DauSach& DSDS){
 	//khoi tao
+	
 	bool clickdms[4] = {false};
 	bool clicktensach[12] = {false};
 	std::string tensach_xem = "";
@@ -389,7 +390,7 @@ void displayDms(DS_DauSach& DSDS){
 	/*sua 1
 	xoa 2
 	them 3*/
-
+	settextstyle(BOLD_FONT, HORIZ_DIR, 2);
 
 	Sach s;
 	int check = -1;
@@ -403,6 +404,18 @@ void displayDms(DS_DauSach& DSDS){
 			bool xoaClick = pos_x >= 290 && pos_x <= 410 && pos_y >= 10 && pos_y <= 50;
 			bool suaClick = pos_x >= 450 && pos_x <= 570 && pos_y >= 10 && pos_y <= 50;
 			bool themClick = pos_x >= 610 && pos_x <= 730 && pos_y >= 10 && pos_y <= 50;
+			bool menuClick = pos_x >= 10 && pos_x <= 250 && pos_y >= 10 && pos_y <= 50;
+			if (menuClick) {
+				setfillstyle(3, 3);
+				setcolor(15);// mau khung
+				setbkcolor(3);
+				cleardevice();
+				menu();
+				return;
+				//chon = 0;
+				
+			}
+			
 			if (xoaClick) {
 				xoa_dms();
 				scr_xem();
@@ -579,48 +592,49 @@ void displayDms(DS_DauSach& DSDS){
 
 			//hieu chinh dms
 			if (chon_dms != NULL && chon == 1) {
-				outtextxy(940, 410,(char*)chon_dms->sach.masach.c_str());
 				if (chon_dms->sach.trangthai == 2 ) {
 					dialog("KHONG THE HIEU CHINH", RED);
 				}
 				else {
+					outtextxy(940, 410,(char*)chon_dms->sach.masach.c_str());
 					trangthai_sua = trangthai[chon_dms->sach.trangthai];
-				}
-				vitri_sua = chon_dms->sach.vitri;
-				//outtextxy(940, 460, (char*)trangthai_sua.c_str());
-				setfillstyle(1, CYAN);
-				bar(935, 455, 1180, 490);
-				bar(935, 505, 1180, 540);
-				char ch = 1;
-				setcolor(WHITE);
-				//while (kbhit()) char a = getch();
-				while(1){
-					
+					vitri_sua = chon_dms->sach.vitri;
+					//outtextxy(940, 460, (char*)trangthai_sua.c_str());
+					setfillstyle(1, CYAN);
+					bar(935, 455, 1180, 490);
+					bar(935, 505, 1180, 540);
+					char ch = 1;
 					setcolor(WHITE);
-					outtextxy(940, 460, (char*)trangthai[chon_dms->sach.trangthai].c_str());
-					if (kbhit()) {
-						ch = getch();
-						if (ch == 13)
-							break;
-						if (ch == 75) {
-							if (chon_dms->sach.trangthai > 0) {
-								chon_dms->sach.trangthai--;
-								setfillstyle(SOLID_FILL, 3);
-								bar(934, 455, 1180, 490);
+					//while (kbhit()) char a = getch();
+					while (1) {
+						
+						setcolor(WHITE);
+						outtextxy(940, 460, (char*)trangthai[chon_dms->sach.trangthai].c_str());
+						if (kbhit()) {
+							ch = getch();
+							if (ch == 13)
+								break;
+							if (ch == 75) {
+								if (chon_dms->sach.trangthai > 0) {
+									chon_dms->sach.trangthai--;
+									setfillstyle(SOLID_FILL, 3);
+									bar(934, 455, 1180, 490);
+								}
 							}
-						}
-						if (ch == 77) {
-							if (chon_dms->sach.trangthai < 2) {
-								chon_dms->sach.trangthai++;
-								setfillstyle(SOLID_FILL, 3);
-								bar(934, 455, 1180, 490);
+							if (ch == 77) {
+								if (chon_dms->sach.trangthai < 2) {
+									chon_dms->sach.trangthai++;
+									setfillstyle(SOLID_FILL, 3);
+									bar(934, 455, 1180, 490);
+								}
 							}
 						}
 					}
+					//InputString(930, 450, 1180, 490, trangthai_sua);
+					InputString(930, 500, 1180, 540, vitri_sua);
+					chon_dms->sach.vitri = vitri_sua;
 				}
-				//InputString(930, 450, 1180, 490, trangthai_sua);
-				InputString(930, 500, 1180, 540, vitri_sua);
-				chon_dms->sach.vitri = vitri_sua;
+				
 			}
 
 			bool suadmsClick = pos_x >= 1150 && pos_x <= 1200 && pos_y >= 620 && pos_y <= 660;
@@ -633,6 +647,9 @@ void displayDms(DS_DauSach& DSDS){
 				so_trangdms = 1;
 				pos_trangdms = 1;
 				in_dms(DSDS.data[check + (pos_trang - 1) * 12]->First, j_dms, so_trangdms, pos_trangdms, dem);
+				delay(100);
+				scr_sua();
+				btnSuadms.display();
 			}
 			//them danh muc sach
 			//bool tensachClick_them = pos_x >= 120 && pos_x <= 450 && pos_y >= 70 && pos_y <= 110;

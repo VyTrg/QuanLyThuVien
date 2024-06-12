@@ -136,6 +136,9 @@
     <ClInclude Include="cautructhedocgia.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="dms.h" />
+    <ClInclude Include="dohoa.h" />
+    <ClInclude Include="dohoa_dausach.h" />
+    <ClInclude Include="dohoa_docgia.h" />
     <ClInclude Include="graphic.h" />
     <ClInclude Include="ham.h" />
     <ClInclude Include="menu.h" />

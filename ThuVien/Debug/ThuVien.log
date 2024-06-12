@@ -1,46 +1,53 @@
 ﻿  main.cpp
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\graphics.h(281,5): warning C4273: 'getch': inconsistent dll linkage
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(281,5): warning C4273: 'getch': inconsistent dll linkage
   (compiling source file 'main.cpp')
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(444,30):
   see previous definition of 'getch'
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\graphics.h(282,5): warning C4273: 'kbhit': inconsistent dll linkage
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\graphics.h(282,5): warning C4273: 'kbhit': inconsistent dll linkage
   (compiling source file 'main.cpp')
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\conio.h(450,30):
   see previous definition of 'kbhit'
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\ham.h(83,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\dohoa.h(53,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(97,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\ham.h(83,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(68,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdausach.h(97,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(73,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(114,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(82,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(119,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(94,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(128,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(96,20): warning C4018: '<': signed/unsigned mismatch
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(140,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(254,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(142,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\muontra.h(353,6): warning C4101: 'dem_sach': unreferenced local variable
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautructhedocgia.h(292,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\muontra.h(358,6): warning C4101: 'dem_dg': unreferenced local variable
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\dohoa_dausach.h(342,6): warning C4101: 'check': unreferenced local variable
   (compiling source file 'main.cpp')
   
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautrucdanhmucsach.h(280,1): warning C4715: 'position': not all control paths return a value
-E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\cautrucmuontra.h(366,1): warning C4715: 'position_mt': not all control paths return a value
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(353,6): warning C4101: 'dem_sach': unreferenced local variable
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\muontra.h(358,6): warning C4101: 'dem_dg': unreferenced local variable
+  (compiling source file 'main.cpp')
+  
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\main.cpp(39,6): warning C4101: 'n': unreferenced local variable
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucdanhmucsach.h(280,1): warning C4715: 'position': not all control paths return a value
+E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\cautrucmuontra.h(366,1): warning C4715: 'position_mt': not all control paths return a value
 graphics.lib(dibutil.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(dibutil.obj)' or at ''; linking object as if no debug info
 graphics.lib(drawing.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(drawing.obj)' or at ''; linking object as if no debug info
 graphics.lib(file.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(file.obj)' or at ''; linking object as if no debug info
@@ -49,4 +56,4 @@ graphics.lib(mouse.obj) : warning LNK4099: PDB '' was not found with 'graphics.l
 graphics.lib(text.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(text.obj)' or at ''; linking object as if no debug info
 graphics.lib(winbgi.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winbgi.obj)' or at ''; linking object as if no debug info
 graphics.lib(winthread.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winthread.obj)' or at ''; linking object as if no debug info
-  ThuVien.vcxproj -> E:\Year_2\Semester_2_2_8\CTDL_GT\ThuVien\ThuVien\Debug\ThuVien.exe
+  ThuVien.vcxproj -> E:\Year_2\Semester_2_0_8\CTDL_GT\ThuVien\ThuVien\Debug\ThuVien.exe

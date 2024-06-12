@@ -577,6 +577,12 @@ int Search_ISBN(DS_DauSach& DSDS, string isbn) {
 	return -1;
 }
 
+int Search_Masach(DS_DauSach& DSDS, string masach) {
+	for (int i = 0; i < DSDS.n; i++)
+		if (DSDS.data[i]->ISBN == TachMa(masach)) return i;
+	return -1;
+}
+
 void Tra_sach(DS_DauSach &DSDS, std::string masach) {
 	int pos = Search_ISBN(DSDS, TachMa(masach));
 	Nodedms node = DSDS.data[pos]->First;
@@ -601,6 +607,92 @@ void Muon_sach(DS_DauSach& DSDS, std::string masach) {
 	}
 }
 
+struct LuotMuonSach {
+	int indexDS; // index cua dau sach
+	int slm; // so luot muon
+};
 
+struct TopSach {
+	int n; // bien luu tru so luong phan tu trong mang 
+
+	LuotMuonSach* list;// con tro tro den mang luot mang sach 
+
+	TopSach(DS_DauSach& DSDS) { //constructor top sach chua thong tin luot muon sach 
+
+		n = DSDS.n;
+		list = new LuotMuonSach[n];
+		for (int i = 0; i < n; i++) {
+			list[i].indexDS = i;
+			list[i].slm = DSDS.data[i]->soluotmuon;
+		}
+		Quicksort_Topsach();
+	}
+	~TopSach() {// giai phong bo nho da cap phat cho mang list (destructor)
+		delete[] list;
+	}
+	void partition(int low, int high) {
+		int i = low, j = high;
+		LuotMuonSach tmp;
+		int pivot = list[(low + high) / 2].slm;
+		do {
+			while (list[i].slm > pivot) i++;
+			while (list[j].slm < pivot) j--;
+			if (i <= j) {
+				tmp = list[i];
+				list[i] = list[j];
+				list[j] = tmp;
+				i++; j--;
+			}
+		} while (i <= j);
+
+		if (low < j) partition(low, j);
+		if (i < high) partition(i, high);
+	}
+	void Quicksort_Topsach() {
+		partition(0, n - 1);
+	}
+};
+int partition1(DS_DauSach& DSDS, int low, int high) {
+	DauSach* pivot = DSDS.data[(low + high) / 2];
+	int i = low - 1;
+	int j = high + 1;
+
+	while (true) {
+		do {
+			i++;
+		} while (DSDS.data[i]->tensach < pivot->tensach);
+
+		do {
+			j--;
+		} while (DSDS.data[j]->tensach > pivot->tensach);
+
+		if (i >= j) {
+			return j;
+		}
+
+		swap(DSDS.data[i], DSDS.data[j]);
+	}
+}
+
+void quickSort1(DS_DauSach& DSDS, int low, int high) {
+	if (low < high) {
+		int pi = partition1(DSDS, low, high);
+		quickSort1(DSDS, low, pi);
+		quickSort1(DSDS, pi + 1, high);
+	}
+}
+
+int InsertDauSach_TenSach(DS_DauSach& DSDS, DauSach& dausach) {
+	int i, k;
+	if (DSDS.n == Max_DS_DauSach) return 0;
+	for (i = 0; i < DSDS.n && DSDS.data[i]->tensach < dausach.tensach; i++);
+	for (k = DSDS.n - 1; k >= i; k--)
+		DSDS.data[k + 1] = DSDS.data[k];
+	DSDS.data[i] = new DauSach;
+	*DSDS.data[i] = dausach; DSDS.n++;
+	//LietKe(DSDS);
+	return 1;
+
+}
 
 //s#endif 

@@ -129,25 +129,7 @@ std::string TachMa(std::string masach) {
 	return temp;
 }
 
-int goiY(std::string s1, std::string s2)
-{
-	int m = s1.length();
-	int n = s2.length();
 
-	/* A loop to slide pat[] one by one */
-	for (int i = 0; i <= n - m; i++) {
-		int j;
-
-	for (j = 0; j < m; j++)
-			if (s2[i + j] != s1[j])
-				break;
-
-		if (j == m)
-			return i;
-	}
-
-	return -1;
-}
 
 //std::string LaySo(std::string s) {
 //	std::string so = "";

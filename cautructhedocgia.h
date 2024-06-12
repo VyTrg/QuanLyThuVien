@@ -8,7 +8,8 @@ using std::ios_base;
 using std::ifstream;
 using std::max;
 
-int nDG;
+int nDG = 0;
+int soSachMuon = 0;
 string ma = "00000";
 
 struct DocGia
@@ -27,7 +28,6 @@ struct DocGia
 
 struct NodeDocGia
 {
-
 	DocGia docgia;
 	NodeDocGia* pLeft = NULL;
 	NodeDocGia* pRight = NULL;
@@ -38,28 +38,74 @@ struct NodeDocGia
 typedef struct NodeDocGia NODE_DG;
 typedef NODE_DG* TREE_DG;
 
+struct HienThi
+{
+	string maThe;
+	string ho;
+	string ten;
+	string maSach;
+	string tenSach;
+	Ngay ngayMuon;
+	int han;
+};
+
+
 
 // ===============prototype===========================
+string chuanhoa_name(string ten);//chuan hoa
+
+bool kt_chuoi_rong(string s);//check rong
 
 void KhoiTao(TREE_DG& t); //khoi tao cay
+
 bool IsEmpty(TREE_DG t); //check rong
+
 DocGia* Create_DG(); //tao doc gia
+
+void DuyetLNR(TREE_DG t, NODE_DG** arr, int& sl);//duyet LNR
+
+void DuyetHT(TREE_DG t, HienThi* ht, int& sl);//duyet hien thi
+
+void xep_noi_botten(NODE_DG** arr, int sl);//sap xep theo ten
+
+void xep_noi_botMATHE(NODE_DG** arr, int sl);//sap xep theo ma the
+
+void xep_noi_botngay(HienThi*& ht, int sl);//sap xep theo ngay
+
 TREE_DG GetNode_DG(DocGia dg); //lay node doc gia
+
 void InsertDGtoTree(TREE_DG& t, DocGia dg); //them doc gia vao cay
-int countDG(TREE_DG t); //dem node
+
 TREE_DG checkMT(TREE_DG t, string a); //check trung
+
 string RandomMT(TREE_DG t); //ramdon ma the
+
 TREE_DG FindMin(TREE_DG t); //tìm min
-TREE_DG Find_DG(TREE_DG t, string MATHE); //tim doc gia theo mathe
-bool IsDeleted_DG(TREE_DG& t, string MT); //check xoa doc gia ton tai
+
+TREE_DG Find_DG(TREE_DG t, string MATHE); //tim doc gia theo ma the
+
+DocGia Tim(TREE_DG t, string mt);//tim doc gia theo ma the
+
+bool Tim_DG(TREE_DG t, string mt);//tim doc gia theo ma the
+
+TREE_DG Deleted_DG(TREE_DG& t, string MT);//xoa doc gia trong cay
+
 int height(TREE_DG t); //chieu cao cay
+
 bool checkAVL(TREE_DG t); //kiem tra cay AVL
+
 TREE_DG XoayPhai(TREE_DG a); //xoay phai
+
 TREE_DG XoayTrai(TREE_DG a); //xoay trai
+
 TREE_DG cap_nhap_AVL(TREE_DG& t); //cap nhap
+
 void Push_info(TREE_DG t, ofstream& outfileDG, ofstream& outfileMT); //them vao file
+
 void Write_info(TREE_DG t, int sl); //ghi file
+
 void Read_info(TREE_DG& t); //doc file
+
 void FreeMemory(TREE_DG t); //giai phong bo nho
 
 string chuanhoa_name(string ten)
@@ -118,45 +164,47 @@ DocGia* Create_DG()
 	newNode->ten = "";
 	newNode->phai = "";
 	newNode->trangThai = -1;
-	newNode->muon = 0;
 
 	return newNode;
 }
 
-void XuatDG(DocGia dg)
-{
-	cout << dg.MATHE << endl;
-	cout << dg.ho << endl;
-	cout << dg.ten << endl;
-	cout << dg.phai << endl;
-	cout << dg.trangThai << endl;
-	cout << dg.muon << endl;
-	while (dg.node != NULL) {
-		std::cout << dg.node->muontra.masach << std::endl;
-		std::cout << DinhDangNgay(dg.node->muontra.ngaymuon) << std::endl;
-		std::cout << DinhDangNgay(dg.node->muontra.ngaytra) << std::endl;
-		std::cout << dg.node->muontra.trangthai;
-		dg.node = dg.node->next;
-		std::cout << std::endl;
-	}
-}
-
-void DuyetLNR(TREE_DG t, NODE_DG** nodes, int &sl)
+void DuyetLNR(TREE_DG t, NODE_DG** arr, int& sl)
 {
 	if (t != NULL)
 	{
-		DuyetLNR(t->pLeft, nodes, sl);
-		nodes[sl++] = t;
-		//XuatDG(t->docgia);
-		DuyetLNR(t->pRight, nodes, sl);
+		DuyetLNR(t->pLeft, arr, sl);
+		arr[sl++] = t;
+		soSachMuon += t->docgia.muon;
+		DuyetLNR(t->pRight, arr, sl);
 	}
 }
+
+void DuyetHT(TREE_DG t, HienThi* ht, int& sl)
+{
+	if (t != NULL) {
+		if (t->pLeft != NULL) DuyetHT(t->pLeft, ht, sl);
+		Nodemt temp = t->docgia.node;
+		while (temp != NULL) {
+			ht[sl].maThe = t->docgia.MATHE;
+			ht[sl].ho = t->docgia.ho;
+			ht[sl].ten = t->docgia.ten;
+			ht[sl].maSach = temp->muontra.masach;
+			////ht[sl]->tenSach;
+			ht[sl].ngayMuon = temp->muontra.ngaymuon;
+			ht[sl].han = TinhNgay(temp->muontra.ngaymuon, temp->muontra.ngaytra);
+			++sl;
+			temp = temp->next;
+		}
+		if (t->pRight != NULL) DuyetHT(t->pRight, ht, sl);
+	}
+}
+
 
 void xep_noi_botten(NODE_DG** arr, int sl)
 {
 	for (int i = 0; i < sl - 1; i++)
 	{
-		for (int j = 0; j < sl - i - 1; j++)
+		for (int j = i + 1; j < sl - i - 1; j++)
 		{
 			if (arr[j]->docgia.ten.compare(arr[j + 1]->docgia.ten) > 0)
 			{
@@ -172,13 +220,29 @@ void xep_noi_botMATHE(NODE_DG** arr, int sl)
 {
 	for (int i = 0; i < sl - 1; i++)
 	{
-		for (int j = 0; j < sl - i - 1; j++)
+		for (int j = i + 1; j < sl - i - 1; j++)
 		{
 			if (arr[j]->docgia.MATHE.compare(arr[j + 1]->docgia.MATHE) > 0)
 			{
 				NODE_DG* temp = arr[j];
 				arr[j] = arr[j + 1];
 				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+void xep_noi_botngay(HienThi*& ht, int sl)
+{
+	for (int i = 0; i < sl - 1; i++)
+	{
+		for (int j = 0; j < sl - i - 1; j++)
+		{
+			if (ht[j].han < ht[j + 1].han)
+			{
+				HienThi temp = ht[j];
+				ht[j] = ht[j + 1];
+				ht[j + 1] = temp;
 			}
 		}
 	}
@@ -191,7 +255,6 @@ TREE_DG GetNode_DG(DocGia dg)
 		return NULL;
 	}
 	// khoi tao danh muc sach trong node doc gia
-
 	p->docgia = dg;
 	p->pLeft = p->pRight = NULL;
 	return (p);
@@ -212,31 +275,6 @@ void InsertDGtoTree(TREE_DG& t, DocGia dg)
 	{
 		InsertDGtoTree(t->pRight, dg);
 	}
-}
-
-int countDG(TREE_DG t)
-{
-	int c = 1;             // ban than node duoc dem la 1;
-	if (t == NULL)
-		return 0;
-	else
-	{
-		c += countDG(t->pLeft);
-		c += countDG(t->pRight);
-		return c;
-	}
-}
-
-bool check_trung(TREE_DG t, string a)
-{
-	if (t == NULL)
-		return false;
-	else if (t->docgia.MATHE.compare(a) > 0)
-		return check_trung(t->pLeft, a);
-	else if (t->docgia.MATHE.compare(a) < 0)
-		return check_trung(t->pRight, a);
-	else
-		return true;
 }
 
 TREE_DG checkMT(TREE_DG t, string a)
@@ -283,6 +321,34 @@ TREE_DG Find_DG(TREE_DG t, string MATHE)
 	return (t);
 }
 
+DocGia Tim(TREE_DG t, string mt)
+{
+	if (mt.compare(t->docgia.MATHE) > 0)
+		return Tim(t->pRight, mt);
+	else if (mt.compare(t->docgia.MATHE) < 0)
+		return Tim(t->pLeft, mt);
+	else // Wohoo... I found you
+	{
+		return t->docgia;
+	}
+}
+
+bool Tim_DG(TREE_DG t, string mt)
+{
+	if (t == NULL) return false;
+	else
+	{
+		if (mt.compare(t->docgia.MATHE) > 0)
+			return Tim_DG(t->pRight, mt);
+		else if (mt.compare(t->docgia.MATHE) < 0)
+			return Tim_DG(t->pLeft, mt);
+		else // Wohoo... I found you
+		{
+			return true;
+		}
+	}
+}
+
 TREE_DG Deleted_DG(TREE_DG& t, string MT)
 {
 	if (t == NULL)
@@ -321,58 +387,11 @@ TREE_DG Deleted_DG(TREE_DG& t, string MT)
 
 			// copy du lieu vao .
 			t->docgia = temp->docgia;
-			//t->mt = temp->mt;
 			t->pRight = Deleted_DG(t->pRight, temp->docgia.MATHE);
 		}
 
 	}
 	return t;
-}
-
-bool IsDeleted_DG(TREE_DG& t, string MT)
-{
-	if (t == NULL)
-		return false;
-	else
-	{
-		if (MT.compare(t->docgia.MATHE) > 0)
-			return IsDeleted_DG(t->pRight, MT);
-		else if (MT.compare(t->docgia.MATHE) < 0)
-			return IsDeleted_DG(t->pLeft, MT);
-		else // Wohoo... I found you, Get ready to be deleted
-		{
-			//case 1: No child
-			if (t->pLeft == NULL && t->pRight == NULL)
-			{
-				delete t; // dangling pointer
-				t = NULL;
-				nDG--;
-			}
-			else if (t->pLeft == NULL)// case 2: One child
-			{
-				NODE_DG* temp = t;
-				t = t->pRight;
-				delete temp;
-				nDG--;
-			}
-			else if (t->pRight == NULL)
-			{
-				NODE_DG* temp = t;
-				t = t->pLeft;
-				delete temp;
-				nDG--;
-			}// Case 3: 2 children
-			else {
-				NODE_DG* temp = FindMin(t->pRight);
-
-				// copy du lieu vao .
-				t->docgia = temp->docgia;
-				//				t->mt = temp->mt;
-				return IsDeleted_DG(t->pRight, temp->docgia.MATHE);
-			}
-			return true;
-		}
-	}
 }
 
 //===============Chuyen cay nhi phan sang cay AVL======================
@@ -473,8 +492,8 @@ void Write_info(TREE_DG t, int sl)
 	outfileDG.close();
 	outfileMT.close();
 }
-//==========Lay du lieu tu file=========
 
+//==========Lay du lieu tu file=========
 void Read_info(TREE_DG& t)
 {
 	ifstream fileInDG, fileInMT;
